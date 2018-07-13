@@ -35,7 +35,7 @@ class ModuleList extends React.Component {
   }
 
   createModule() {
-    console.log(this.state.module.title);
+    console.log('button clicked, woot');
   }
 
   titleChanged(event) {
@@ -56,8 +56,7 @@ class ModuleList extends React.Component {
   render() {
     return (<div className="container">
       <input onChange={this.titleChanged} value={this.state.module.title} className="form-control" placeholder="title"/>
-      <button className="btn btn-primary onClick={this.createModule}
-        btn-block">
+      <button className="btn btn-primary btn-block" onClick={this.createModule}>
         <i className="fa fa-plus"></i>
       </button>
       <ul className="list-group">
