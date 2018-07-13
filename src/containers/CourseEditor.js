@@ -7,7 +7,7 @@ class CourseEditor
 extends React.Component {
   render() {
     return (<div className="row">
-      <div className="col-2">
+      <div className="col-3">
         <h2>Modules</h2>
         <ModuleList />
       </div>
