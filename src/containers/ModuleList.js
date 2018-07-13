@@ -4,7 +4,12 @@ import ModuleListItem from '../components/ModuleListItem';
 class ModuleList extends React.Component {
   constructor() {
     super();
+    this.createModule = this.createModule.bind(this);
+    this.titleChanged = this.titleChanged.bind(this);
     this.state = {
+      module: {
+        title: ''
+      },
       modules: [
         {
           title: 'Module 1 - jQuery',
@@ -29,6 +34,18 @@ class ModuleList extends React.Component {
     };
   }
 
+  createModule() {
+    console.log(this.state.module.title);
+  }
+
+  titleChanged(event) {
+    this.setState({
+      module: {
+        title: event.target.value
+      }
+    });
+  }
+
   renderListOfModules() {
     let modules = this.state.modules.map(function(module) {
       return <ModuleListItem title={module.title} key={module.id}/>;
@@ -37,9 +54,16 @@ class ModuleList extends React.Component {
   }
 
   render() {
-    return (<ul className="list-group">
-      {this.renderListOfModules()}
-    </ul>);
+    return (<div className="container">
+      <input onChange={this.titleChanged} value={this.state.module.title} className="form-control" placeholder="title"/>
+      <button className="btn btn-primary onClick={this.createModule}
+        btn-block">
+        <i className="fa fa-plus"></i>
+      </button>
+      <ul className="list-group">
+        {this.renderListOfModules()}
+      </ul>
+    </div>);
   }
 }
 
