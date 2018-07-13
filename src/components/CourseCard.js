@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default class CourseCard
-extends React.Component {
+class CourseCard extends React.Component {
   render() {
-    return (<div className="container-fluid" className="card" styles={{
+    return (<div className="card" styles={{
         width: '18rem'
       }}>
       <div className="card-body">
@@ -13,10 +12,12 @@ extends React.Component {
         <p className="card-text">
           Learn about front-end development and upcoming technologies!
         </p>
-        <a href="#" className="btn btn-primary">
+        <a href="/api/user" className="btn btn-primary">
           Click here for more!
         </a>
       </div>
     </div>);
   }
 }
+
+export default CourseCard;

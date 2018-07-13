@@ -5,12 +5,12 @@ class LessonTabs
 extends React.Component {
   render() {
     return (<div className="container-fluid">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active Tab</a>
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
+          <a className="nav-link active" href="/api/user">Active Tab</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Another Tab</a>
+        <li className="nav-item">
+          <a className="nav-link" href="/api/user">Another Tab</a>
         </li>
       </ul>
       <TopicPills/>
