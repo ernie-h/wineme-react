@@ -5,8 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 import CourseCard from './components/CourseCard';
 import CourseManager from './containers/CourseManager';
-import ModuleList from './containers/ModuleList';
-import LessonTabs from './containers/LessonTabs';
+
 
 // import CourseManager from './containers/CourseManager';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css';

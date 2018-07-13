@@ -3,7 +3,7 @@ import React from 'react';
 export default class CourseCard
 extends React.Component {
   render() {
-    return (<div class="container-fluid" className="card" styles={{
+    return (<div className="container-fluid" className="card" styles={{
         width: '18rem'
       }}>
       <div className="card-body">
