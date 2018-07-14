@@ -5,11 +5,13 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 import CourseCard from './components/CourseCard';
 import CourseManager from './containers/CourseManager';
+import CourseList from './containers/CourseList';
 
 class App extends React.Component {
   render() {
     return (<div>
       <CourseManager/>
+      <CourseList />
       <div className="card-deck">
         <CourseCard/>
         <CourseCard/>
