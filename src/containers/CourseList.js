@@ -1,10 +1,46 @@
 import React from 'react';
 import CourseRow from '../components/CourseRow';
-// import CourseService from '../services/CourseService';
+import CourseService from '../services/CourseService';
 
 class CourseList extends React.Component {
   constructor() {
     super();
+    this.courseService = CourseService.instance;
+    this.titleChanged = this.titleChanged.bind(this);
+    this.createCourse = this.createCourse.bind(this);
+  }
+
+  componentDidMount() {
+   this.findAllCourses();
+  }
+
+  findAllCourses() {
+    this.courseService.findAllCourses().then((courses) => {
+      console.log(courses);
+      this.setState({courses: courses});
+    });
+  }
+
+  titleChanged(event) {
+    this.setState({
+      course: {
+        title: event.target.value
+      }
+    });
+  }
+
+  createCourse() {
+    this.courseService.createCourse(this.state.course).then(()=>this.findAllCourses());
+  }
+
+  renderCourseRows() {
+    let courses = null;
+    if (this.state) {
+      courses = this.state.courses.map(function(course) {
+        return <CourseRow course={course} key={course.id}/>;
+      });
+    }
+    return courses;
   }
 
   render() {
@@ -15,13 +51,15 @@ class CourseList extends React.Component {
           <tr>
             <th>Title</th>
           </tr>
+          <tr>
+            <th><input className="form-control" onChange={this.titleChanged} id="titleFld" placeholder="CS101"/></th>
+            <th>
+              <button className="btn btn-primary" onClick={this.createCourse}>Add</button>
+            </th>
+          </tr>
         </thead>
         <tbody>
-          <CourseRow />
-          <CourseRow />
-          <CourseRow />
-          <CourseRow />
-          
+          {this.renderCourseRows()}
         </tbody>
       </table>
     </div>);
