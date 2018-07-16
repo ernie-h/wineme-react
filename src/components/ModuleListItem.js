@@ -7,7 +7,6 @@ class ModuleListItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.courseId);
     return (<li className="list-group-item">
       <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
         {this.props.module.title}

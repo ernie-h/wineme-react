@@ -28,6 +28,7 @@ class ModuleList extends React.Component {
     this.setCourseId(newProps.courseId);
     this.findAllModulesForCourse(newProps.courseId);
   }
+  
   setModuleTitle(event) {
     this.setState({
       module: {
@@ -52,7 +53,7 @@ class ModuleList extends React.Component {
 
   deleteModule(moduleId) {
     this.moduleService.deleteModule(moduleId).then(() => {
-      this.findAllModulesForCourse(this.state.courseId)
+      this.findAllModulesForCourse(this.state.courseId);
     });
   }
 

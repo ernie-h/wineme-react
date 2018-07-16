@@ -1,23 +1,56 @@
 import React from 'react';
 import CourseRow from '../components/CourseRow';
-import CourseService from '../services/CourseService';
+import CourseServiceClient from '../services/CourseServiceClient';
 
 class CourseList extends React.Component {
   constructor() {
     super();
-    this.courseService = CourseService.instance;
+    this.courseService = CourseServiceClient.instance;
     this.titleChanged = this.titleChanged.bind(this);
     this.createCourse = this.createCourse.bind(this);
+    this.deleteCourse = this.deleteCourse.bind(this);
+    this.state = {
+      courseId: '',
+      course: {
+        title: ''
+      },
+      courses: []
+    };
   }
 
   componentDidMount() {
     this.findAllCourses();
   }
 
+  setCourseTitle(event) {
+    this.setState({
+      course: {
+        title: event.target.value
+      }
+    });
+  }
+
+  setCourseId(courseId) {
+    this.setState({courseId: courseId});
+  }
+
+  setCourses(courses) {
+    this.setState({courses: courses});
+  }
+
   findAllCourses() {
     this.courseService.findAllCourses().then((courses) => {
-      console.log(courses);
       this.setState({courses: courses});
+    });
+  }
+
+  createCourse() {
+    this.courseService.createCourse(this.state.course).then(() => this.findAllCourses());
+  }
+
+  deleteCourse(courseId) {
+    this.courseService.deleteCourse(courseId).then(() => {
+      this.findAllCourses(this.state.courseId);
     });
   }
 
@@ -29,17 +62,10 @@ class CourseList extends React.Component {
     });
   }
 
-  createCourse() {
-    this.courseService.createCourse(this.state.course).then(() => this.findAllCourses());
-  }
-
   renderCourseRows() {
-    let courses = null;
-    if (this.state) {
-      courses = this.state.courses.map(function(course) {
-        return <CourseRow course={course} key={course.id}/>;
-      });
-    }
+    let courses = this.state.courses.map((course) => {
+      return <CourseRow course={course} key={course.id} delete={this.deleteCourse}/>;
+    });
     return courses;
   }
 
