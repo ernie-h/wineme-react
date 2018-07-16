@@ -13,7 +13,6 @@ class App extends React.Component {
     return (
       <div>
       <CourseManager/>
-      <CourseList />
     </div>);
   }
 }
