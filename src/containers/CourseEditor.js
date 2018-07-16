@@ -7,7 +7,7 @@ class CourseEditor extends React.Component {
     super(props);
     this.selectCourse = this.selectCourse.bind(this);
     this.state = {
-      courseId: '', 
+      courseId: '',
     };
   }
   componentDidMount() {
@@ -30,7 +30,7 @@ class CourseEditor extends React.Component {
       <div className="row">
         <div className="col-3">
           <h2>Modules</h2>
-          <ModuleList/>
+          <ModuleList courseId={this.state.courseId} />
         </div>
         <div className="col-6">
           <h2>Lessons</h2>
