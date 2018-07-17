@@ -1,15 +1,17 @@
 import React from 'react';
+import CourseServiceClient from '../services/CourseServiceClient';
 import LessonTabs from './LessonTabs';
 import ModuleList from './ModuleList';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-
 class CourseEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.courseService = CourseServiceClient.instance;
     this.selectCourse = this.selectCourse.bind(this);
     this.state = {
       courseId: '',
+      course: ''
     };
   }
   componentDidMount() {
@@ -21,15 +23,23 @@ class CourseEditor extends React.Component {
   }
 
   selectCourse(courseId) {
-    this.setState({courseId: courseId});
+    this.setState({
+      courseId: courseId
+    }, this.findCourseById(courseId));
+  }
+
+  findCourseById(courseId) {
+    this.courseService.findCourseById(courseId).then((course) => {
+      this.setState({course: course});
+    });
   }
 
   render() {
     return (<div>
       <h2>
-        Editing Course: {this.state.courseId}
+        Editing Course: {this.state.course.title}
       </h2>
-          <ModuleList courseId={this.state.courseId} />
+      <ModuleList courseId={this.state.courseId}/>
 
     </div>);
   }
