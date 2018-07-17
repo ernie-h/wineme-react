@@ -28,7 +28,7 @@ class ModuleList extends React.Component {
     this.setCourseId(newProps.courseId);
     this.findAllModulesForCourse(newProps.courseId);
   }
-  
+
   setModuleTitle(event) {
     this.setState({
       module: {
@@ -73,7 +73,7 @@ class ModuleList extends React.Component {
   render() {
     return (<Router>
       <div className="row">
-        <div className="col-9">
+        <div className="col-3">
           <h4>Modules courseId: {this.state.courseId}</h4>
           <input onChange={this.setModuleTitle} value={this.state.module.title} className="form-control" placeholder="New Module"/>
           <button className="btn btn-primary btn-block" onClick={this.createModule}>
@@ -83,7 +83,7 @@ class ModuleList extends React.Component {
             {this.renderListOfModules()}
           </ul>
         </div>
-        <div className="col-3">
+        <div className="col-9">
           <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
         </div>
       </div>
