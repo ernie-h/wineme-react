@@ -1,4 +1,6 @@
 import React from 'react';
+import LessonTabs from './LessonTabs';
+
 class ModuleEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -30,10 +32,15 @@ class ModuleEditor extends React.Component {
   }
 
   render() {
-    return (<div className="display-5">
+    console.log("CourseId: " +this.state.courseId);
+    console.log("ModuleId: " +this.state.moduleId);
+    return (
+      <div className="display-5">
+        <h2>Lessons</h2>
       <h6>
         Module Editor
       </h6>
+      <LessonTabs />
       {this.state.courseId},
       {this.state.moduleId}
     </div>);

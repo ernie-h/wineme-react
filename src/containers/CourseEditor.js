@@ -1,6 +1,8 @@
 import React from 'react';
 import LessonTabs from './LessonTabs';
 import ModuleList from './ModuleList';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
 
 class CourseEditor extends React.Component {
   constructor(props) {
@@ -27,16 +29,8 @@ class CourseEditor extends React.Component {
       <h2>
         Editing Course: {this.state.courseId}
       </h2>
-      <div className="row">
-        <div className="col-3">
-          <h2>Modules</h2>
           <ModuleList courseId={this.state.courseId} />
-        </div>
-        <div className="col-6">
-          <h2>Lessons</h2>
-          <LessonTabs/>
-        </div>
-      </div>
+
     </div>);
   }
 }
