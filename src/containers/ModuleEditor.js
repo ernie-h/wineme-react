@@ -1,14 +1,17 @@
 import React from 'react';
 import LessonTabs from './LessonTabs';
+import LessonServiceClient from '../services/LessonServiceClient';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.lessonService = LessonServiceClient.instance;
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.state = {
       courseId: '',
-      moduleId: ''
+      moduleId: '',
+      lessons: []
     };
   }
 
@@ -21,6 +24,7 @@ class ModuleEditor extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setCourseId(newProps.match.params.courseId);
     this.setModuleId(newProps.match.params.moduleId);
+    this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
   }
 
   setCourseId(courseId) {
@@ -31,18 +35,31 @@ class ModuleEditor extends React.Component {
     this.setState({moduleId: moduleId});
   }
 
+  setLessons(lessons) {
+    this.setState({lessons: lessons});
+  }
+
+  findAllLessonsForModule(courseId, moduleId) {
+    this.lessonService.findAllLessonsForModule(courseId, moduleId).then((lessons) => {
+      this.setLessons(lessons);
+
+    });
+  }
+
+  renderListOfLessons() {
+    let lessons = this.state.lessons.map((lesson) => {
+      return <LessonTabs lesson={lesson} key={lesson.id}/>;
+    });
+    return lessons;
+  }
+
   render() {
-    console.log("CourseId: " +this.state.courseId);
-    console.log("ModuleId: " +this.state.moduleId);
-    return (
-      <div className="display-5">
-        <h2>Lessons</h2>
-      <h6>
-        Module Editor
-      </h6>
-      <LessonTabs />
-      {this.state.courseId},
-      {this.state.moduleId}
+    return (<div className="container-fluid">
+      <h2>Lessons</h2>
+      <h6>Editting module: "INSERT MODULE TITLE" </h6>
+      <ul className="nav nav-tabs">
+        {this.renderListOfLessons()}
+      </ul>
     </div>);
   }
 }

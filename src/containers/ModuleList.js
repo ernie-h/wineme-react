@@ -74,7 +74,7 @@ class ModuleList extends React.Component {
     return (<Router>
       <div className="row">
         <div className="col-3">
-          <h4>Modules courseId: {this.state.courseId}</h4>
+          <h2>Modules</h2>
           <input onChange={this.setModuleTitle} value={this.state.module.title} className="form-control" placeholder="New Module"/>
           <button className="btn btn-primary btn-block" onClick={this.createModule}>
             <i className="fa fa-plus"></i>
