@@ -36,7 +36,6 @@ class CourseList extends React.Component {
 
   setCourseId(courseId) {
     this.setState({courseId: courseId});
-    console.log('Course list courseid'+this.state.courseId);
   }
 
   setCourses(courses) {
