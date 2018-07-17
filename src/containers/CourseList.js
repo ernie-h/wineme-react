@@ -9,12 +9,16 @@ class CourseList extends React.Component {
     this.titleChanged = this.titleChanged.bind(this);
     this.createCourse = this.createCourse.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
+    //Update course WIP
+    //this.editClick = this.editClick.bind(this);
     this.state = {
       courseId: '',
       course: {
         title: ''
       },
-      courses: []
+      courses: [],
+      //Update course WIP
+      // showCourseRowUpdate: false
     };
   }
 
@@ -38,6 +42,12 @@ class CourseList extends React.Component {
     this.setState({courses: courses});
   }
 
+  //Update course WIP
+  // editClick() {
+  //       console.log(this.state.showCourseRowUpdate);
+  //   this.setState({showCourseRowUpdate: true});
+  // }
+
   findAllCourses() {
     this.courseService.findAllCourses().then((courses) => {
       this.setState({courses: courses});
@@ -50,9 +60,21 @@ class CourseList extends React.Component {
 
   deleteCourse(courseId) {
     this.courseService.deleteCourse(courseId).then(() => {
-      this.findAllCourses(this.state.courseId);
+      this.findAllCourses();
     });
   }
+
+  // populate(course) {
+  //   this.courseService.updateCourse(courseId, course).then(()=> {
+  //     this.findAllCourses();
+  //   });
+  // }
+  //
+  // updateCourse(courseId, course) {
+  //   this.courseService.updateCourse(courseId, course).then(()=> {
+  //     this.findAllCourses();
+  //   });
+  // }
 
   titleChanged(event) {
     this.setState({
@@ -61,7 +83,8 @@ class CourseList extends React.Component {
       }
     });
   }
-
+  //Add to render course rows for update WIP
+  // editClick={this.editClick}
   renderCourseRows() {
     let courses = this.state.courses.map((course) => {
       return <CourseRow course={course} key={course.id} delete={this.deleteCourse}/>;

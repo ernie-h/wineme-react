@@ -37,6 +37,24 @@ class CourseServiceClient {
       method: 'delete'
     });
   }
+
+  findCourseById(courseId) {
+    return fetch(
+        COURSE_ID_API_URL.replace('CID', courseId))
+      .then(function(response) {
+        return response.json();
+      });
+  }
+
+  updateCourse(courseId, course) {
+    return fetch(COURSE_ID_API_URL.replace('CID', courseId), {
+      method: 'PUT',
+      body: JSON.stringify(course),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }
 
 export default CourseServiceClient;
