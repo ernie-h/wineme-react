@@ -3,6 +3,8 @@ import LessonTabs from './LessonTabs';
 import LessonServiceClient from '../services/LessonServiceClient';
 import Lessons from '../components/Lessons';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { matchPath } from 'react-router';
+
 
 class ModuleEditor extends React.Component {
   constructor(props) {
@@ -29,6 +31,7 @@ class ModuleEditor extends React.Component {
   componentDidMount() {
     this.setCourseId(this.props.match.params.courseId);
     this.setModuleId(this.props.match.params.moduleId);
+    this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
   }
 
   componentWillReceiveProps(newProps) {
