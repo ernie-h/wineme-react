@@ -6,10 +6,11 @@ class ModuleEditor extends React.Component {
   constructor(props) {
     super(props);
     this.createLesson = this.createLesson.bind(this);
-    this.lessonService = LessonServiceClient.instance;
+    this.deleteLesson = this.deleteLesson.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.setLessonTitle = this.setLessonTitle.bind(this);
+    this.lessonService = LessonServiceClient.instance;
     this.state = {
       courseId: '',
       moduleId: '',
@@ -28,7 +29,7 @@ class ModuleEditor extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setCourseId(newProps.match.params.courseId);
     this.setModuleId(newProps.match.params.moduleId);
-    this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
+    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
   }
 
   setCourseId(courseId) {
@@ -58,14 +59,21 @@ class ModuleEditor extends React.Component {
   }
 
   createLesson() {
+    this.setState({lesson: {title: ''}});
     this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
+    .then(() => {this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+    });
+  }
+
+  deleteLesson(lessonId) {
+    this.lessonService.deleteLesson(lessonId)
     .then(() => {this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
     });
   }
 
   renderListOfLessons() {
     let lessons = this.state.lessons.map((lesson) => {
-      return <LessonTabs lesson={lesson} key={lesson.id}/>;
+      return <LessonTabs lesson={lesson} key={lesson.id} delete={this.deleteLesson}/>;
     });
     return lessons;
   }
@@ -76,7 +84,8 @@ class ModuleEditor extends React.Component {
       <h2>Lessons</h2>
       <div className="row">
         <div className="col-3">
-          <input onChange={this.setLessonTitle} value={this.state.lesson.title} className="form-control" placeholder="How to life"/>
+          <input onChange={this.setLessonTitle} value={this.state.lesson.title}
+            className="form-control" placeholder="How to life"/>
         </div>
         <div className="col-1">
           <button className="btn btn-primary btn-block" onClick={this.createLesson}>

@@ -46,6 +46,7 @@ class ModuleList extends React.Component {
   }
 
   createModule() {
+    this.setState({module: {title: ''}});
     this.moduleService.createModule(this.state.courseId, this.state.module).then(() => {
       this.findAllModulesForCourse(this.state.courseId);
     });

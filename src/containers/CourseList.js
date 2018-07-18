@@ -55,6 +55,7 @@ class CourseList extends React.Component {
   }
 
   createCourse() {
+    this.setState({course: {title: ''}});
     this.courseService.createCourse(this.state.course).then(() => this.findAllCourses());
   }
 
@@ -101,7 +102,8 @@ class CourseList extends React.Component {
             <th>Title</th>
           </tr>
           <tr>
-            <th><input className="form-control" onChange={this.titleChanged} id="titleFld" placeholder="CS101"/></th>
+            <th><input className="form-control" onChange={this.titleChanged}
+              value={this.state.course.title} placeholder="CS101"/></th>
             <th>
               <button className="btn btn-primary" onClick={this.createCourse}>Add</button>
             </th>
