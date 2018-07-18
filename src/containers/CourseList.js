@@ -6,7 +6,7 @@ class CourseList extends React.Component {
   constructor() {
     super();
     this.courseService = CourseServiceClient.instance;
-    this.titleChanged = this.titleChanged.bind(this);
+    this.setCourseTitle = this.setCourseTitle.bind(this);
     this.createCourse = this.createCourse.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
     //Update course WIP
@@ -14,7 +14,9 @@ class CourseList extends React.Component {
     this.state = {
       courseId: '',
       course: {
-        title: ''
+        title: '',
+        created: '',
+        modified: ''
       },
       courses: [],
       //Update course WIP
@@ -29,7 +31,8 @@ class CourseList extends React.Component {
   setCourseTitle(event) {
     this.setState({
       course: {
-        title: event.target.value
+        title: event.target.value,
+        created: Date.now()
       }
     });
   }
@@ -55,7 +58,11 @@ class CourseList extends React.Component {
   }
 
   createCourse() {
-    this.setState({course: {title: ''}});
+    this.setState({
+      course: {
+        title: ''
+      }
+    });
     this.courseService.createCourse(this.state.course).then(() => this.findAllCourses());
   }
 
@@ -77,13 +84,6 @@ class CourseList extends React.Component {
   //   });
   // }
 
-  titleChanged(event) {
-    this.setState({
-      course: {
-        title: event.target.value
-      }
-    });
-  }
   //Add to render course rows for update WIP
   // editClick={this.editClick}
   renderCourseRows() {
@@ -94,22 +94,23 @@ class CourseList extends React.Component {
   }
 
   render() {
-    return (<div>
-      <h2>Course List</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-          </tr>
-          <tr>
-            <th><input className="form-control" onChange={this.titleChanged}
-              value={this.state.course.title} placeholder="CS101"/></th>
-            <th>
-              <button className="btn btn-primary" onClick={this.createCourse}>Add</button>
-            </th>
-          </tr>
+    return (<div className="ml-4">
+      <h1>Course List</h1>
+      <table className="table w-75">
+        <thead className="">
+          <th>
+            <div class="input-group">
+              <input className="form-control" onChange={this.setCourseTitle} value={this.state.course.title} placeholder="CS101"/>
+              <span class="input-group-btn">
+                <button className="btn btn-primary" onClick={this.createCourse}>Add</button>
+              </span>
+            </div>
+          </th>
         </thead>
         <tbody>
+          <tr>
+            <h5 className="ml-2 pt-3">Course Title</h5>
+          </tr>
           {this.renderCourseRows()}
         </tbody>
       </table>

@@ -9,15 +9,16 @@ class CourseRow extends React.Component {
   render() {
     return (<tr>
       <td>
+        <span className="float-right">
+          <i className="fa fa-pencil" onClick={this.props.editClick}></i>
+          <i className="fa fa-times-circle pl-2" onClick={() => {
+              this.props.delete(this.props.course.id);
+            }}></i>
+          </span>
         <Link to={`/course/${this.props.course.id}`}>
           {this.props.course.title}
         </Link>
-        <span className="float-right">
-          <i className="fa fa-trash" onClick={() => {
-              this.props.delete(this.props.course.id);
-            }}></i>
-          <i className="fa fa-pencil" onClick={this.props.editClick}></i>
-        </span>
+        <h6> Created on: {this.props.course.created}</h6>
       </td>
     </tr>);
   }

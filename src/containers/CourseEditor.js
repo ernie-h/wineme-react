@@ -35,9 +35,10 @@ class CourseEditor extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<div className="ml-4">
       <h2>
-        Editing Course: {this.state.course.title}
+        Editing Course:
+        <small class="text-muted pl-3">{this.state.course.title}</small>
       </h2>
       <ModuleList courseId={this.state.courseId}/>
 
