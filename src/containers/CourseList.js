@@ -9,8 +9,10 @@ class CourseList extends React.Component {
     this.setCourseTitle = this.setCourseTitle.bind(this);
     this.createCourse = this.createCourse.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
-    //Update course WIP
-    //this.editClick = this.editClick.bind(this);
+    this.updateCourse = this.updateCourse.bind(this);
+    this.editClickHandler = this.editClickHandler.bind(this);
+    this.isEditCourse = this.isEditCourse.bind(this);
+
     this.state = {
       courseId: '',
       course: {
@@ -19,8 +21,8 @@ class CourseList extends React.Component {
         modified: ''
       },
       courses: [],
-      //Update course WIP
-      // showCourseRowUpdate: false
+      editClicked: false,
+      editCourseId: ''
     };
   }
 
@@ -45,12 +47,6 @@ class CourseList extends React.Component {
     this.setState({courses: courses});
   }
 
-  //Update course WIP
-  // editClick() {
-  //       console.log(this.state.showCourseRowUpdate);
-  //   this.setState({showCourseRowUpdate: true});
-  // }
-
   findAllCourses() {
     this.courseService.findAllCourses().then((courses) => {
       this.setState({courses: courses});
@@ -72,38 +68,40 @@ class CourseList extends React.Component {
     });
   }
 
-  // populate(course) {
-  //   this.courseService.updateCourse(courseId, course).then(()=> {
-  //     this.findAllCourses();
-  //   });
-  // }
-  //
-  // updateCourse(courseId, course) {
-  //   this.courseService.updateCourse(courseId, course).then(()=> {
-  //     this.findAllCourses();
-  //   });
-  // }
+  editClickHandler(courseId) {
+    this.setState({editCourseId: courseId});
+  }
 
-  //Add to render course rows for update WIP
-  // editClick={this.editClick}
+  isEditCourse(courseId) {
+    return this.state.editCourseId === courseId;
+  }
+
+  updateCourse(courseId, course) {
+    this.courseService.updateCourse(courseId, course)
+    .then(this.setState({editCourseId: ''}))
+    .then(()=> {this.findAllCourses();
+    });
+  }
+
   renderCourseRows() {
     let courses = this.state.courses.map((course) => {
-      return <CourseRow course={course} key={course.id} delete={this.deleteCourse}/>;
+      return <CourseRow course={course} key={course.id} delete={this.deleteCourse}
+        editClick={this.editClickHandler} isEditCourse={this.isEditCourse(course.id)}
+        updateCourse={this.updateCourse}/>;
     });
     return courses;
   }
 
   render() {
-    return (<div className="ml-4">
+    return (<div className="ml-4 mr-5">
       <h1>Course List</h1>
-      <table className="table w-75">
+      <table className="table w-80">
         <thead className="">
           <th>
-            <div class="input-group">
-              <input className="form-control" onChange={this.setCourseTitle} value={this.state.course.title} placeholder="CS101"/>
-              <span class="input-group-btn">
-                <button className="btn btn-primary" onClick={this.createCourse}>Add</button>
-              </span>
+            <div class="form-inline">
+              <input className="form-control mr-sm-2" onChange={this.setCourseTitle}
+                value={this.state.course.title} placeholder="CS101"/>
+                <button className="btn btn-outline-success my-2 my-sm-0" onClick={this.createCourse}>Add</button>
             </div>
           </th>
         </thead>

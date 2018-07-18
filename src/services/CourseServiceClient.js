@@ -47,6 +47,7 @@ class CourseServiceClient {
   }
 
   updateCourse(courseId, course) {
+     console.log("fetch hit");
     return fetch(COURSE_ID_API_URL.replace('CID', courseId), {
       method: 'PUT',
       body: JSON.stringify(course),
