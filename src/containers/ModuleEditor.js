@@ -1,6 +1,8 @@
 import React from 'react';
 import LessonTabs from './LessonTabs';
 import LessonServiceClient from '../services/LessonServiceClient';
+import TopicPills from '../components/TopicPills';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class ModuleEditor extends React.Component {
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.setLessonTitle = this.setLessonTitle.bind(this);
+    this.onClickTabHandler = this.onClickTabHandler.bind(this);
     this.lessonService = LessonServiceClient.instance;
     this.state = {
       courseId: '',
@@ -17,7 +20,9 @@ class ModuleEditor extends React.Component {
       lesson: {
         title: ''
       },
-      lessons: []
+      lessons: [],
+      tabClicked: false,
+      activeTabLessonId: ''
     };
   }
 
@@ -71,16 +76,27 @@ class ModuleEditor extends React.Component {
     });
   }
 
+  onClickTabHandler(lessonId){
+    this.setState({activeTabLessonId: lessonId});
+  }
+  isActiveTab(lessonId) {
+    return this.state.activeTabLessonId === lessonId;
+  }
+
   renderListOfLessons() {
     let lessons = this.state.lessons.map((lesson) => {
-      return <LessonTabs lesson={lesson} key={lesson.id} delete={this.deleteLesson}/>;
+      return <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}
+        lesson={lesson} key={lesson.id} delete={this.deleteLesson}
+        tabClick={this.onClickTabHandler} isActiveTab={this.isActiveTab(lesson.id)}
+        activeTabHandler={this.activeTabHandler}/>;
     });
     return lessons;
   }
 
   // linebreak in here needs to be changed
   render() {
-    return (<div className="container-fluid">
+    return (<Router>
+      <div className="container-fluid">
       <h2>Lessons</h2>
       <div className="row">
         <div className="col-3">
@@ -99,7 +115,9 @@ class ModuleEditor extends React.Component {
       <ul className="nav nav-tabs">
         {this.renderListOfLessons()}
       </ul>
-    </div>);
+      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
+    </div>
+  </Router>);
   }
 }
 
