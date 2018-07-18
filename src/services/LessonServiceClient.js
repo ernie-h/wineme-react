@@ -37,7 +37,7 @@ export default class LessonService {
     });
   }
 
-  deleteModule(lessonId) {
+  deleteLesson(lessonId) {
     return fetch(LESSON_ID_API_URL.replace('LID', lessonId), {
       method: 'delete'
     });
