@@ -1,28 +1,27 @@
 import React from 'react';
-import TopicPills from '../components/TopicPills';
+import {Link} from 'react-router-dom';
 
 class LessonTabs extends React.Component {
   constructor(props) {
     super(props);
   }
-  //   this.state = {
-  //     lesson: ''
-  //   };
-  // }
-  //
-  // componentDidMount() {
-  //   this.setState({lesson: this.props.courseId});
-  // }
 
+  //Can wrap link around whole component instead of title
   render() {
-    return (<div>
+    return (<div onClick={() => {
+        this.props.tabClick(this.props.lesson.id);
+      }}>
       <li className="nav-item">
         <span className="close" onClick={() => {
-            console.log(this.props.delete);
-            console.log(this.props.lesson.id);
             this.props.delete(this.props.lesson.id);
           }}>×</span>
-        <a className="nav-link active" href="#">{this.props.lesson.title}</a>
+        <a className={this.props.isActiveTab
+            ? 'nav-link active'
+            : 'nav-link'}>
+          <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+            {this.props.lesson.title}
+          </Link>
+        </a>
       </li>
     </div>);
   }
