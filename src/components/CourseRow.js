@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import CourseRowUpdate from './CourseRowUpdate';
 
 class CourseRow extends React.Component {
   constructor(props) {

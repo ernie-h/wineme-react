@@ -1,7 +1,7 @@
 import React from 'react';
 import LessonTabs from './LessonTabs';
 import LessonServiceClient from '../services/LessonServiceClient';
-import TopicPills from '../components/TopicPills';
+import Lessons from '../components/Lessons';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 class ModuleEditor extends React.Component {
@@ -115,7 +115,7 @@ class ModuleEditor extends React.Component {
       <ul className="nav nav-tabs">
         {this.renderListOfLessons()}
       </ul>
-      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
+      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Lessons}/>
     </div>
   </Router>);
   }

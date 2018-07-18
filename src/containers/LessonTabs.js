@@ -8,22 +8,23 @@ class LessonTabs extends React.Component {
 
   //Can wrap link around whole component instead of title
   render() {
-    return (<div onClick={() => {
-        this.props.tabClick(this.props.lesson.id);
-      }}>
-      <li className="nav-item">
-        <span className="close" onClick={() => {
-            this.props.delete(this.props.lesson.id);
-          }}>×</span>
-        <a className={this.props.isActiveTab
-            ? 'nav-link active'
-            : 'nav-link'}>
-          <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+    return (<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+
+      <div onClick={() => {
+          this.props.tabClick(this.props.lesson.id);
+        }}>
+        <li className="nav-item">
+          <span className="close" onClick={() => {
+              this.props.delete(this.props.lesson.id);
+            }}>×</span>
+          <h6 className={this.props.isActiveTab
+              ? 'nav-link active'
+              : 'nav-link'}>
             {this.props.lesson.title}
-          </Link>
-        </a>
-      </li>
-    </div>);
+          </h6>
+        </li>
+      </div>
+    </Link>);
   }
 }
 
