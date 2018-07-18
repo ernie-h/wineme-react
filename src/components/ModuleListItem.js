@@ -12,10 +12,10 @@ class ModuleListItem extends React.Component {
         {this.props.module.title}
       </Link>
       <span className="float-right">
-        <i className="fa fa-trash" onClick={() => {
+        <i className="fa fa-pencil"></i>
+        <i className="fa fa-times-circle pl-2" onClick={() => {
             this.props.delete(this.props.module.id);
           }}></i>
-        <i className="fa fa-pencil"></i>
       </span>
     </li>);
   }

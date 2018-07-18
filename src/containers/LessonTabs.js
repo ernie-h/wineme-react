@@ -17,11 +17,11 @@ class LessonTabs extends React.Component {
           <span className="close" onClick={() => {
               this.props.delete(this.props.lesson.id);
             }}>×</span>
-          <h6 className={this.props.isActiveTab
+          <p className={this.props.isActiveTab
               ? 'nav-link active'
               : 'nav-link'}>
             {this.props.lesson.title}
-          </h6>
+          </p>
         </li>
       </div>
     </Link>);
