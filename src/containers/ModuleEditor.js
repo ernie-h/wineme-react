@@ -1,10 +1,9 @@
 import React from 'react';
-import LessonTabs from './LessonTabs';
-import LessonServiceClient from '../services/LessonServiceClient';
-import Lessons from '../components/Lessons';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import { matchPath } from 'react-router';
-
+import LessonServiceClient from '../services/LessonServiceClient';
+import ModuleServiceClient from '../services/ModuleServiceClient'
+import LessonTabs from './LessonTabs';
+import Lessons from '../components/Lessons';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class ModuleEditor extends React.Component {
     this.setModuleId = this.setModuleId.bind(this);
     this.setLessonTitle = this.setLessonTitle.bind(this);
     this.onClickTabHandler = this.onClickTabHandler.bind(this);
+    this.moduleService = ModuleServiceClient.instance;
     this.lessonService = LessonServiceClient.instance;
     this.state = {
       courseId: '',
@@ -23,6 +23,7 @@ class ModuleEditor extends React.Component {
         title: ''
       },
       lessons: [],
+      module: '',
       tabClicked: false,
       activeTabLessonId: ''
     };
@@ -31,13 +32,15 @@ class ModuleEditor extends React.Component {
   componentDidMount() {
     this.setCourseId(this.props.match.params.courseId);
     this.setModuleId(this.props.match.params.moduleId);
+    this.findModuleById(this.props.match.params.moduleId);
     this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
   }
 
   componentWillReceiveProps(newProps) {
     this.setCourseId(newProps.match.params.courseId);
     this.setModuleId(newProps.match.params.moduleId);
-    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+    this.findModuleById(newProps.match.params.moduleId);
+    this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
   }
 
   setCourseId(courseId) {
@@ -63,6 +66,13 @@ class ModuleEditor extends React.Component {
   findAllLessonsForModule(courseId, moduleId) {
     this.lessonService.findAllLessonsForModule(courseId, moduleId).then((lessons) => {
       this.setLessons(lessons);
+    });
+  }
+
+  findModuleById(moduleId) {
+    console.log(moduleId);
+    this.moduleService.findModuleById(moduleId).then((module) => {
+      this.setState({module: module});
     });
   }
 
@@ -101,6 +111,7 @@ class ModuleEditor extends React.Component {
     return (<Router>
       <div className="container-fluid">
       <h2>Lessons</h2>
+        <h6>Editting module: {this.state.module.title}</h6>
       <div className="row">
         <div className="col-3">
           <input onChange={this.setLessonTitle} value={this.state.lesson.title}
@@ -112,13 +123,10 @@ class ModuleEditor extends React.Component {
           </button>
         </div>
       </div>
-      <br></br>
-      <h6>Editting module: "INSERT MODULE TITLE"
-      </h6>
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs pt-3">
         {this.renderListOfLessons()}
       </ul>
-      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Lessons}/>
+      <Route exact path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Lessons}/>
     </div>
   </Router>);
   }
