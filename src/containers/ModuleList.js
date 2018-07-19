@@ -9,6 +9,9 @@ class ModuleList extends React.Component {
     super();
     this.createModule = this.createModule.bind(this);
     this.deleteModule = this.deleteModule.bind(this);
+    this.updateModule = this.updateModule.bind(this);
+    this.editClickHandler = this.editClickHandler.bind(this);
+    this.isEditModule = this.isEditModule.bind(this);
     this.setModuleTitle = this.setModuleTitle.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
     this.moduleService = ModuleServiceClient.instance;
@@ -17,7 +20,9 @@ class ModuleList extends React.Component {
       module: {
         title: ''
       },
-      modules: []
+      modules: [],
+      editClicked: false,
+      editModuleId: ''
     };
   }
 
@@ -65,10 +70,26 @@ class ModuleList extends React.Component {
       this.setModules(modules);
     });
   }
+  editClickHandler(moduleId) {
+    this.setState({editModuleId: moduleId});
+  }
+
+  isEditModule(moduleId) {
+    return this.state.editModuleId === moduleId;
+  }
+
+  updateModule(moduleId, module) {
+    this.moduleService.updateModule(moduleId, module)
+    .then(this.setState({editModuleId: ''}))
+    .then(()=> {this.findAllModulesForCourse(this.state.courseId);
+    });
+  }
 
   renderListOfModules() {
     let modules = this.state.modules.map((module) => {
-      return <ModuleListItem courseId={this.state.courseId}module={module} key={module.id} delete={this.deleteModule}/>;
+      return <ModuleListItem courseId={this.state.courseId} module={module}
+        key={module.id} delete={this.deleteModule} editClick={this.editClickHandler}
+        isEditModule={this.isEditModule(module.id)} updateModule={this.updateModule}/>;
     });
     return modules;
   }

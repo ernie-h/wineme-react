@@ -49,4 +49,14 @@ export default class ModuleService {
       method: 'delete'
     });
   }
+
+  updateModule(moduleId, module) {
+    return fetch(MODULE_ID_API_URL.replace('MID', moduleId), {
+      method: 'PUT',
+      body: JSON.stringify(module),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }
