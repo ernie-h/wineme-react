@@ -24,6 +24,14 @@ export default class ModuleService {
       });
   }
 
+  findModuleById(moduleId) {
+    return fetch(
+        MODULE_ID_API_URL.replace('MID', moduleId))
+      .then(function(response) {
+        return response.json();
+      });
+  }
+
   createModule(courseId, module) {
     return fetch(MODULE_COURSE_API_URL.replace('CID', courseId), {
       body: JSON.stringify(module),

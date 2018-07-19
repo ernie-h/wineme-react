@@ -22,11 +22,13 @@ class ModuleList extends React.Component {
   }
 
   componentDidMount() {
-    this.setCourseId(this.props.courseId);
+    this.setCourseId(this.props.match.params.courseId);
+    this.findAllModulesForCourse(this.props.match.params.courseId);
   }
+
   componentWillReceiveProps(newProps) {
-    this.setCourseId(newProps.courseId);
-    this.findAllModulesForCourse(newProps.courseId);
+    this.setCourseId(newProps.match.params.courseId);
+    this.findAllModulesForCourse(newProps.match.params.courseId);
   }
 
   setModuleTitle(event) {

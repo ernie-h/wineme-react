@@ -9,22 +9,29 @@ class Lessons extends React.Component {
     this.state = {
       courseId: '',
       moduleId: '',
+      lessonId: '',
       lesson: '',
       lessons: []
     };
   }
 
   componentDidMount() {
-    this.setCourseId(this.props.match.params.courseId);
-    this.setModuleId(this.props.match.params.moduleId);
-    this.setLessonId(this.props.match.params.lessonId);
+      this.setCourseId(this.props.match.params.courseId);
+      this.setModuleId(this.props.match.params.moduleId);
+      this.setLessonId(this.props.match.params.lessonId);
   }
 
   componentWillReceiveProps(newProps) {
-    this.setCourseId(newProps.match.params.courseId);
-    this.setModuleId(newProps.match.params.moduleId);
-    this.setLessonId(newProps.match.params.lessonId);
+
+      this.setCourseId(newProps.match.params.courseId);
+      this.setModuleId(newProps.match.params.moduleId);
+      this.setLessonId(newProps.match.params.lessonId);
+
   }
+  //
+  // componentWillUnmount() {
+  //   this.setState({courseId: '', moduleId: '', lesson: '', lessons: []});
+  // }
 
   setCourseId(courseId) {
     this.setState({courseId: courseId});
@@ -42,7 +49,6 @@ class Lessons extends React.Component {
 
   render() {
     return (<div className="container-fluid">
-      <span>
         <h1>
           Course Id: {this.state.courseId}
         </h1>
@@ -51,7 +57,6 @@ class Lessons extends React.Component {
         <h1>
           Lesson Id: {this.state.lessonId}
         </h1>
-      </span>
     </div>);
   }
 }

@@ -35,14 +35,15 @@ class CourseEditor extends React.Component {
   }
 
   render() {
-    return (<div className="ml-4">
-      <h2>
-        Editing Course:
-        <small className="text-muted pl-3">{this.state.course.title}</small>
-      </h2>
-      <ModuleList courseId={this.state.courseId}/>
-
-    </div>);
+    return (<Router>
+      <div className="ml-4">
+        <h2>
+          Editing Course:
+          <small className="text-muted pl-3">{this.state.course.title}</small>
+        </h2>
+        <Route path="/course/:courseId" component={ModuleList}/>
+      </div>
+    </Router>);
   }
 }
 
