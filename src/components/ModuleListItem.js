@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 class ModuleListItem extends React.Component {
   constructor(props) {
     super(props);
-
     this.setEditModule = this.setEditModule.bind(this);
     this.state = {
       module: {
@@ -22,7 +21,7 @@ class ModuleListItem extends React.Component {
   }
 
   render() {
-    return (<li className="list-group-item">
+    return (<li className="list-group-item container-fluid">
       <span className="float-right">
         <i className="fa fa-pencil" onClick={() => this.props.editClick(this.props.module.id)}></i>
         <i className="fa fa-times-circle pl-2" onClick={() => {

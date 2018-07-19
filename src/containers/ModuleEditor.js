@@ -3,13 +3,18 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LessonServiceClient from '../services/LessonServiceClient';
 import ModuleServiceClient from '../services/ModuleServiceClient'
 import LessonTabs from './LessonTabs';
-import Lessons from '../components/Lessons';
+import Topics from '../components/Topics';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
     super(props);
     this.createLesson = this.createLesson.bind(this);
     this.deleteLesson = this.deleteLesson.bind(this);
+
+    this.updateLesson = this.updateLesson.bind(this);
+    this.editClickHandler = this.editClickHandler.bind(this);
+    this.isEditLesson = this.isEditLesson.bind(this);
+
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.setLessonTitle = this.setLessonTitle.bind(this);
@@ -25,7 +30,9 @@ class ModuleEditor extends React.Component {
       lessons: [],
       module: '',
       tabClicked: false,
-      activeTabLessonId: ''
+      activeTabLessonId: '',
+      editClicked: false,
+      editLessonId: ''
     };
   }
 
@@ -70,7 +77,6 @@ class ModuleEditor extends React.Component {
   }
 
   findModuleById(moduleId) {
-    console.log(moduleId);
     this.moduleService.findModuleById(moduleId).then((module) => {
       this.setState({module: module});
     });
@@ -95,23 +101,40 @@ class ModuleEditor extends React.Component {
   isActiveTab(lessonId) {
     return this.state.activeTabLessonId === lessonId;
   }
+  //Update
+  editClickHandler(lessonId) {
+    this.setState({editLessonId: lessonId});
+  }
+
+  isEditLesson(lessonId) {
+    return this.state.editLessonId === lessonId;
+  }
+
+  updateLesson(lessonId, lesson) {
+    this.lessonService.updateLesson(lessonId, lesson)
+    .then(this.setState({editLessonId: ''}))
+    .then(()=> {this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+    });
+  }
 
   renderListOfLessons() {
     let lessons = this.state.lessons.map((lesson) => {
       return <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}
         lesson={lesson} key={lesson.id} delete={this.deleteLesson}
         tabClick={this.onClickTabHandler} isActiveTab={this.isActiveTab(lesson.id)}
-        activeTabHandler={this.activeTabHandler}/>;
+        activeTabHandler={this.activeTabHandler}  editClick={this.editClickHandler}
+        isEditLesson={this.isEditLesson(lesson.id)} updateLesson={this.updateLesson}/>;
     });
     return lessons;
   }
 
-  // linebreak in here needs to be changed
   render() {
     return (<Router>
       <div className="container-fluid">
       <h2>Lessons</h2>
-        <h6>Editting module: {this.state.module.title}</h6>
+        <h2>Editing module:
+          <small className="text-muted pl-3">{this.state.module.title}</small>
+        </h2>
       <div className="row">
         <div className="col-3">
           <input onChange={this.setLessonTitle} value={this.state.lesson.title}
@@ -126,7 +149,7 @@ class ModuleEditor extends React.Component {
       <ul className="nav nav-tabs pt-3">
         {this.renderListOfLessons()}
       </ul>
-      <Route exact path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Lessons}/>
+      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Topics}/>
     </div>
   </Router>);
   }

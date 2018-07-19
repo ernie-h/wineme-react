@@ -42,4 +42,14 @@ export default class LessonService {
       method: 'delete'
     });
   }
+
+  updateLesson(lessonId, lesson) {
+    return fetch(LESSON_ID_API_URL.replace('LID', lessonId), {
+      method: 'PUT',
+      body: JSON.stringify(lesson),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }
