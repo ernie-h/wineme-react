@@ -52,10 +52,11 @@ class Topics extends React.Component {
     return (<div className="container-fluid">
       {this.state.lessonId !== '' &&
         <ul className="nav nav-pills">
-            <li className="nav-item">
+            <li className="nav-item pt-4">
               <a className="nav-link active">LessonId: {this.state.lessonId}</a>
             </li>
-          </ul>}
+          </ul>
+        }
       </div>);
   }
 }

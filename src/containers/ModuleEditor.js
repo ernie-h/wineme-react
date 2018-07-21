@@ -130,7 +130,7 @@ class ModuleEditor extends React.Component {
 
   render() {
     return (<Router>
-      <div className="container-fluid">
+      <div className="container-fluid pb-5">
       <h2>Lessons</h2>
         <h2>Editing module:
           <small className="text-muted pl-3">{this.state.module.title}</small>
@@ -138,7 +138,7 @@ class ModuleEditor extends React.Component {
       <div className="row">
         <div className="col-3">
           <input onChange={this.setLessonTitle} value={this.state.lesson.title}
-            className="form-control" placeholder="How to life"/>
+            className="form-control" placeholder="New lesson"/>
         </div>
         <div className="col-1">
           <button className="btn btn-primary btn-block" onClick={this.createLesson}>

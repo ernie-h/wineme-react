@@ -10,7 +10,7 @@ import CourseManager from './containers/CourseManager';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="bg-light pb-5">
       <CourseManager/>
     </div>);
   }

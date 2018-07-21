@@ -1,8 +1,8 @@
 let _singleton = Symbol();
-const LESSON_MODULE_COURSE_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/course/CID/module/MID/lesson';
-const LESSON_ID_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson/LID';
+const LESSON_MODULE_COURSE_API_URL = 'http://localhost:8080/api/course/CID/module/MID/lesson';
+const LESSON_ID_API_URL = 'http://localhost:8080/api/lesson/LID';
 //for find all modules
-const LESSON_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson';
+// const LESSON_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson';
 
 export default class LessonService {
   constructor(singletonToken) {
@@ -44,6 +44,8 @@ export default class LessonService {
   }
 
   updateLesson(lessonId, lesson) {
+    console.log(lessonId)
+    console.log(lesson)
     return fetch(LESSON_ID_API_URL.replace('LID', lessonId), {
       method: 'PUT',
       body: JSON.stringify(lesson),

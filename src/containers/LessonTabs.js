@@ -22,36 +22,36 @@ class LessonTabs extends React.Component {
 
   //Can wrap link around whole component instead of title
   render() {
-    return (
-      <div onClick={() => {
-          this.props.tabClick(this.props.lesson.id);
-        }}>
-        <li className="nav-item">
-          <span className="float-right">
-            <i className="fa fa-pencil" onClick={() => this.props.editClick(this.props.lesson.id)}></i>
-            <i className="fa fa-times-circle pl-2" onClick={() => {
-                this.props.delete(this.props.lesson.id);
-              }}></i>
-          </span>
-          <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+    return (<div onClick={() => {
+        this.props.tabClick(this.props.lesson.id);
+      }}>
+      <li className="nav-item">
           <p className={this.props.isActiveTab
               ? 'nav-link active'
               : 'nav-link'}>
+              <span className="float-right">
+                <i className="fa fa-pencil pl-2" onClick={() => this.props.editClick(this.props.lesson.id)}></i>
+                <i className="fa fa-times-circle pl-2" onClick={() => {
+                    this.props.delete(this.props.lesson.id);
+                  }}></i>
+              </span>
+              <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
             {
               this.props.isEditLesson
                 ? <div>
                     <span className="float-right">
-                      <i className="fa fa-check mb-2 pr-2" onClick={() => this.props.updateLesson(this.props.lesson.id, this.state.lesson)}></i>
+                      <i className="fa fa-check mb-2" onClick={() => this.props.updateLesson(this.props.lesson.id, this.state.lesson)}></i>
                     </span>
-                    <input className="form-control w-50" value={this.state.lesson.title} onChange={this.setEditLesson}/>
+                    <input className="form-control w-70" placeHolder="New lesson title"
+                      value={this.state.lesson.title} onChange={this.setEditLesson}/>
                   </div>
                 : this.props.lesson.title
 
             }
+            </Link>
           </p>
-          </Link>
-        </li>
-      </div>);
+      </li>
+    </div>);
   }
 }
 
