@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LessonServiceClient from '../services/LessonServiceClient';
 import ModuleServiceClient from '../services/ModuleServiceClient'
 import LessonTabs from './LessonTabs';
-import Topics from '../components/Topics';
+import LessonEditor from '../containers/LessonEditor';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
@@ -148,7 +148,7 @@ class ModuleEditor extends React.Component {
       <ul className="nav nav-tabs pt-3">
         {this.renderListOfLessons()}
       </ul>
-      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Topics}/>
+      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
     </div>);
   }
 }
