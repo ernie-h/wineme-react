@@ -22,14 +22,11 @@ class Topics extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-   if(newProps.match.params.lessonId === this.props.match.params.lessonId) {
-     this.initState();
-   }
-   else {
+
     this.setLessonId(newProps.match.params.lessonId);
     this.setCourseId(newProps.match.params.courseId);
     this.setModuleId(newProps.match.params.moduleId);}
-  }
+  
 
   initState() {
     this.setState({courseId: '', moduleId: '', lessonId: '', lesson: '', lessons: []});

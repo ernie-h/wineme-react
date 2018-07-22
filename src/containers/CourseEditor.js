@@ -36,21 +36,28 @@ class CourseEditor extends React.Component {
   }
 
   render() {
-    return (<Router>
-      <div className="ml-4 pb-5">
-        <h2>
-          <a href='/courses' role='button'>
-          <i className="fa fa-chevron-circle-left ml-3" href="/courses"></i>
+    return (<div className="ml-4 pb-5">
+      <h2>
+        <a href='/courses' role='button'>
+          <i className="fa fa-chevron-circle-left ml-1" href="/courses"></i>
         </a>
-          <small className="text-muted pl-3">Back to courses</small>
-        </h2>
-        <h2 className="pt-0 ml-3 pb-4 pt-3">
-          Editing Course:
-          <small className="text-muted pl-3">{this.state.course.title}</small>
-        </h2>
-        <Route path="/course/:courseId" component={ModuleList}/>
+        <small className="text-muted pl-3">Back to courses</small>
+      </h2>
+      <div className="row">
+        <div className="col-3 pt-3">
+          <h3 className="pt-0 ml-1 pb-4 pt-3 pl-3 wd-90 bg-secondary
+            text-dark rounded">
+            Editing Course:
+            <small className="text-light pl-3">{this.state.course.title}</small>
+          </h3>
+          <Route path="/course/:courseId" component={ModuleList}/>
+        </div>
+        <div className="col-9">
+          <h2 className="ml-3">Lessons</h2>
+          <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
+        </div>
       </div>
-    </Router>);
+    </div>);
   }
 }
 

@@ -21,7 +21,7 @@ class ModuleListItem extends React.Component {
   }
 
   render() {
-    return (<li className="list-group-item container-fluid">
+    return (<li className="list-group-item container-fluid bg-secondary">
       <span className="float-right">
         <i className="fa fa-pencil" onClick={() => this.props.editClick(this.props.module.id)}></i>
         <i className="fa fa-times-circle pl-2" onClick={() => {
@@ -37,7 +37,7 @@ class ModuleListItem extends React.Component {
               <input className="form-control w-50" value={this.state.module.title}
                 onChange={this.setEditModule}/>
             </div>
-          : <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
+          : <Link className="text-light" to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
               {this.props.module.title}
             </Link>
       }
