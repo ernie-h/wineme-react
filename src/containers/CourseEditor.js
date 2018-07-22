@@ -36,23 +36,31 @@ class CourseEditor extends React.Component {
   }
 
   render() {
-    return (<div className="ml-4 pb-5">
-      <h2>
-        <a href='/courses' role='button'>
-          <i className="fa fa-chevron-circle-left ml-1" href="/courses"></i>
-        </a>
-        <small className="text-muted pl-3">Back to courses</small>
-      </h2>
-      <div className="row">
-        <div className="col-3 pt-3">
-          <h3 className="pt-0 ml-1 pb-4 pt-3 pl-3 wd-90 bg-secondary
+    return (<div className="mt-4 ml-4 mr-5 pb-5">
+      <span className="row">
+          <h1>
+            <a className="ml-3 mt-1" href='/courses' role='button'>
+              <i className="fa fa-chevron-circle-left ml-1 text-dark" href="/courses"></i>
+            </a>
+          </h1>
+          <h2>
+            <small className="text-muted pl-3">Back to courses</small>
+          </h2>
+      </span>
+      <div className="row mr-1">
+        <div className="col-lg-3 pt-3">
+          <div className=" pt-0 ml-1 pb-3 pt-3 pl-3 wd-90 bg-secondary
             text-dark rounded">
+          <h3>
             Editing Course:
-            <small className="text-light pl-3">{this.state.course.title}</small>
           </h3>
+          <h4 className="text-light text-justify">
+            {this.state.course.title}
+          </h4>
+        </div>
           <Route path="/course/:courseId" component={ModuleList}/>
         </div>
-        <div className="col-9">
+        <div className="col-lg-9 pl-0 pr-0 mt-3 mb-5 bg-dark rounded">
           <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
         </div>
       </div>

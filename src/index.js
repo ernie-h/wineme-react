@@ -12,7 +12,7 @@ import CourseManager from './containers/CourseManager';
 class App extends React.Component {
   render() {
     return (<Router>
-      <div className="bg-light pb-5 pt-5">
+      <div className="container-fluid bg-light pb-5 pt-3">
       <CourseManager/>
     </div>
   </Router>);
