@@ -130,17 +130,17 @@ class ModuleEditor extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid pb-5">
-        <h2>Editing module:
+      <div className="container-fluid mr-4 mt-3 pb-5 pl-4 bg-dark rounded">
+        <h3 className="text-light pt-3 pb-3 mr-5">Editing module:
           <small className="text-muted pl-3">{this.state.module.title}</small>
-        </h2>
-      <div className="row">
+        </h3>
+      <div className="row pt-4">
         <div className="col-3">
           <input onChange={this.setLessonTitle} value={this.state.lesson.title}
-            className="form-control" placeholder="New lesson"/>
+            className="form-control bg-light" placeholder="New lesson"/>
         </div>
         <div className="col-1">
-          <button className="btn btn-primary btn-block" onClick={this.createLesson}>
+          <button className="btn btn-secondary btn-block" onClick={this.createLesson}>
             <i className="fa fa-plus"></i>
           </button>
         </div>
