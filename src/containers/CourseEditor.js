@@ -53,7 +53,6 @@ class CourseEditor extends React.Component {
           <Route path="/course/:courseId" component={ModuleList}/>
         </div>
         <div className="col-9">
-          <h2 className="ml-3">Lessons</h2>
           <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
         </div>
       </div>
