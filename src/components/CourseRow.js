@@ -52,29 +52,5 @@ class CourseRow extends React.Component {
     </div>);
   }
 }
-//
-// <tr className="form-inline">
-//   <td className="ml-3">
-//     <span className="float-right text-light">
-//       <i className="fa fa-pencil" onClick={() => this.props.editClick(this.props.course.id)}></i>
-//       <i className="fa fa-times-circle pl-2" onClick={() => {
-//           this.props.delete(this.props.course.id);
-//         }}></i>
-//     </span>
-//     {
-//       this.props.isEditCourse
-//         ? <div>
-//             <span className="float-right">
-//               <i className="fa fa-check pr-2 text-light" onClick={() => this.props.updateCourse(this.props.course.id, this.state.course)}></i>
-//             </span>
-//             <input className="form-control w-25" value={this.state.course.title} onChange={this.setEditCourse}/>
-//           </div>
-//         : <Link className="text-light" to={`/course/${this.props.course.id}`}>
-//             {this.props.course.title}
-//           </Link>
-//     }
-//     <p>Created on: {this.props.course.created}</p>
-//   </td>
-// </tr>
 
 export default CourseRow;
