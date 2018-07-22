@@ -77,41 +77,42 @@ class CourseList extends React.Component {
   }
 
   updateCourse(courseId, course) {
-    this.courseService.updateCourse(courseId, course)
-    .then(this.setState({editCourseId: ''}))
-    .then(()=> {this.findAllCourses();
+    this.courseService.updateCourse(courseId, course).then(this.setState({editCourseId: ''})).then(() => {
+      this.findAllCourses();
     });
   }
 
   renderCourseRows() {
     let courses = this.state.courses.map((course) => {
-      return <CourseRow course={course} key={course.id} delete={this.deleteCourse}
-        editClick={this.editClickHandler} isEditCourse={this.isEditCourse(course.id)}
-        updateCourse={this.updateCourse}/>;
+      return <CourseRow course={course} key={course.id} delete={this.deleteCourse} editClick={this.editClickHandler} isEditCourse={this.isEditCourse(course.id)} updateCourse={this.updateCourse}/>;
     });
     return courses;
   }
 
   render() {
-    return (<div className="ml-4 mr-5">
-      <h1>Course List</h1>
-      <table className="table w-80">
-        <thead className="">
-          <th>
-            <div class="form-inline">
-              <input className="form-control mr-sm-2" onChange={this.setCourseTitle}
-                value={this.state.course.title} placeholder="CS101"/>
-                <button className="btn btn-outline-success my-2 my-sm-0" onClick={this.createCourse}>Add</button>
+    return (<div className="mt-5 ml-4 mr-5 pb-4 bg-dark rounded text-secondary">
+      <div className="row pb-3">
+        <div className="col-md-2 mt-3 ml-4 pr-3 ">
+          <h1 className="text-light ml-4 pt-3 display-4">Courses:</h1>
+          </div>
+          <div className="col-md-9 mt-5">
+            <div className="row ml-3 float-right">
+              <div className="col-md-9">
+                <input className="form-control mr-sm-2 mt-1" onChange={this.setCourseTitle} value={this.state.course.title} placeholder="CS101"/>
+              </div>
+              <div className="col-md-3">
+                <button className="btn btn-secondary btn-block mt-1" onClick={this.createCourse}>
+                  <i className="fa fa-plus"></i>
+                </button>
+              </div>
             </div>
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <h5 className="ml-2 pt-3">Course Title</h5>
-          </tr>
-          {this.renderCourseRows()}
-        </tbody>
-      </table>
+          </div>
+        </div>
+
+      <div className="form-inline rounded ml-5 mr-1 wd-50">
+        {this.renderCourseRows()}
+      </div>
+
     </div>);
   }
 }
