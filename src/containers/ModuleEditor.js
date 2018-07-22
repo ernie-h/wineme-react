@@ -129,9 +129,8 @@ class ModuleEditor extends React.Component {
   }
 
   render() {
-    return (<Router>
+    return (
       <div className="container-fluid pb-5">
-      <h2>Lessons</h2>
         <h2>Editing module:
           <small className="text-muted pl-3">{this.state.module.title}</small>
         </h2>
@@ -150,8 +149,7 @@ class ModuleEditor extends React.Component {
         {this.renderListOfLessons()}
       </ul>
       <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={Topics}/>
-    </div>
-  </Router>);
+    </div>);
   }
 }
 

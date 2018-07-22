@@ -53,7 +53,11 @@ class ModuleList extends React.Component {
   }
 
   createModule() {
-    this.setState({module: {title: ''}});
+    this.setState({
+      module: {
+        title: ''
+      }
+    });
     this.moduleService.createModule(this.state.courseId, this.state.module).then(() => {
       this.findAllModulesForCourse(this.state.courseId);
     });
@@ -79,9 +83,8 @@ class ModuleList extends React.Component {
   }
 
   updateModule(moduleId, module) {
-    this.moduleService.updateModule(moduleId, module)
-    .then(this.setState({editModuleId: ''}))
-    .then(()=> {this.findAllModulesForCourse(this.state.courseId);
+    this.moduleService.updateModule(moduleId, module).then(this.setState({editModuleId: ''})).then(() => {
+      this.findAllModulesForCourse(this.state.courseId);
     });
   }
 
@@ -95,23 +98,22 @@ class ModuleList extends React.Component {
   }
 
   render() {
-    return (<Router>
-      <div className="row pb-5 ml-1">
+    return (<div className=" pb-5 ml-1 rounded">
+      <div className="row pt-3 pb-4">
+        <div className="col-9">
+          <input onChange={this.setModuleTitle} value={this.state.module.title}
+            className="form-control bg-light text-light" placeholder="New Module"/>
+        </div>
         <div className="col-3">
-          <h2>Modules</h2>
-          <input onChange={this.setModuleTitle} value={this.state.module.title} className="form-control" placeholder="New Module"/>
-          <button className="btn btn-primary btn-block" onClick={this.createModule}>
+          <button className="btn btn-dark btn-block" onClick={this.createModule}>
             <i className="fa fa-plus"></i>
           </button>
-          <ul className="list-group">
-            {this.renderListOfModules()}
-          </ul>
-        </div>
-        <div className="col-9">
-          <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
         </div>
       </div>
-    </Router>);
+      <ul className="list-group">
+        {this.renderListOfModules()}
+      </ul>
+    </div>);
   }
 }
 
