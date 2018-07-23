@@ -96,7 +96,7 @@ class CourseList extends React.Component {
           <h1 className="text-light ml-4 pt-3 display-4">Courses:</h1>
           </div>
           <div className="col-md-9 mt-5">
-            <div className="row ml-3 float-right">
+            <div className="row ml-3 float-right pr-4">
               <div className="col-md-9">
                 <input className="form-control mr-sm-2 mt-1" onChange={this.setCourseTitle} value={this.state.course.title} placeholder="CS101"/>
               </div>

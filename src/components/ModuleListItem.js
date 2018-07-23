@@ -7,7 +7,7 @@ class ModuleListItem extends React.Component {
     this.setEditModule = this.setEditModule.bind(this);
     this.state = {
       module: {
-        title: '',
+        title: ''
       }
     };
   }
@@ -15,13 +15,15 @@ class ModuleListItem extends React.Component {
   setEditModule(event) {
     this.setState({
       module: {
-        title: event.target.value,
+        title: event.target.value
       }
     });
   }
 
   render() {
-    return (<li className="list-group-item container-fluid bg-secondary">
+    return (<li className={this.props.isActiveTab
+        ? 'list-group-item active'
+        : 'list-group-item bg-secondary'}>
       <span className="float-right">
         <i className="fa fa-pencil" onClick={() => this.props.editClick(this.props.module.id)}></i>
         <i className="fa fa-times-circle pl-2" onClick={() => {
@@ -34,8 +36,7 @@ class ModuleListItem extends React.Component {
               <span className="float-right">
                 <i className="fa fa-check pr-2" onClick={() => this.props.updateModule(this.props.module.id, this.state.module)}></i>
               </span>
-              <input className="form-control w-50" value={this.state.module.title}
-                onChange={this.setEditModule}/>
+              <input className="form-control w-50" value={this.state.module.title} onChange={this.setEditModule}/>
             </div>
           : <Link className="text-light" to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
               {this.props.module.title}

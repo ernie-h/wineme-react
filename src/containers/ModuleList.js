@@ -22,7 +22,9 @@ class ModuleList extends React.Component {
       },
       modules: [],
       editClicked: false,
-      editModuleId: ''
+      editModuleId: '',
+      tabClicked: false,
+      activeTabLessonId: '',
     };
   }
 
@@ -88,11 +90,20 @@ class ModuleList extends React.Component {
     });
   }
 
+  onClickTabHandler(moduleId){
+    this.setState({activeTabModuleId: moduleId});
+  }
+
+  isActiveTab(moduleId) {
+    return this.state.activeTabModuleId === moduleId;
+  }
+
   renderListOfModules() {
     let modules = this.state.modules.map((module) => {
       return <ModuleListItem courseId={this.state.courseId} module={module}
         key={module.id} delete={this.deleteModule} editClick={this.editClickHandler}
-        isEditModule={this.isEditModule(module.id)} updateModule={this.updateModule}/>;
+        isEditModule={this.isEditModule(module.id)} updateModule={this.updateModule}
+        tabClick={this.onClickTabHandler} isActiveTab={this.isActiveTab(module.id)}/>;
     });
     return modules;
   }

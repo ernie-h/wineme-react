@@ -101,7 +101,7 @@ class ModuleEditor extends React.Component {
   isActiveTab(lessonId) {
     return this.state.activeTabLessonId === lessonId;
   }
-  //Update
+
   editClickHandler(lessonId) {
     this.setState({editLessonId: lessonId});
   }
@@ -122,7 +122,7 @@ class ModuleEditor extends React.Component {
       return <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}
         lesson={lesson} key={lesson.id} delete={this.deleteLesson}
         tabClick={this.onClickTabHandler} isActiveTab={this.isActiveTab(lesson.id)}
-        activeTabHandler={this.activeTabHandler}  editClick={this.editClickHandler}
+          editClick={this.editClickHandler}
         isEditLesson={this.isEditLesson(lesson.id)} updateLesson={this.updateLesson}/>;
     });
     return lessons;
@@ -135,11 +135,11 @@ class ModuleEditor extends React.Component {
           <small className="text-muted pl-3">{this.state.module.title}</small>
         </h3>
       <div className="row pt-4 mr-5">
-        <div className="col-3">
+        <div className="col-md-8">
           <input onChange={this.setLessonTitle} value={this.state.lesson.title}
             className="form-control bg-light" placeholder="New lesson"/>
         </div>
-        <div className="col-1">
+        <div className="col-md-2">
           <button className="btn btn-secondary btn-block" onClick={this.createLesson}>
             <i className="fa fa-plus"></i>
           </button>

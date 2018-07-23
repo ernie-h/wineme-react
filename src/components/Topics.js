@@ -20,7 +20,6 @@ class Topics extends React.Component {
     });
   }
 
-  //Can wrap link around whole component instead of title
   render() {
     return (<div className="bg-dark rounded-top" onClick={() => {
         this.props.tabClick(this.props.topic.id);
