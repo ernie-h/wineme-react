@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LessonServiceClient from '../services/LessonServiceClient';
 import ModuleServiceClient from '../services/ModuleServiceClient'
 import LessonTabs from './LessonTabs';
-import LessonEditor from '../containers/LessonEditor';
+import LessonEditor from './LessonEditor';
 
 class ModuleEditor extends React.Component {
   constructor(props) {
