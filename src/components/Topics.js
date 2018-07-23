@@ -1,61 +1,59 @@
-// import React from 'react';
-//
-// class Topics extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.setCourseId = this.setCourseId.bind(this);
-//     this.setModuleId = this.setModuleId.bind(this);
-//     this.setLessonId = this.setLessonId.bind(this);
-//     this.state = {
-//       courseId: '',
-//       moduleId: '',
-//       lessonId: '',
-//       lesson: '',
-//       lessons: []
-//     };
-//   }
-//
-//   componentDidMount() {
-//     this.setCourseId(this.props.match.params.courseId);
-//     this.setModuleId(this.props.match.params.moduleId);
-//     this.setLessonId(this.props.match.params.lessonId);
-//   }
-//
-//   componentWillReceiveProps(newProps) {
-//
-//     this.setLessonId(newProps.match.params.lessonId);
-//     this.setCourseId(newProps.match.params.courseId);
-//     this.setModuleId(newProps.match.params.moduleId);}
-//
-//
-//   initState() {
-//     this.setState({courseId: '', moduleId: '', lessonId: '', lesson: '', lessons: []});
-//
-//   }
-//
-//   setCourseId(courseId) {
-//     this.setState({courseId: courseId});
-//   }
-//
-//   setModuleId(moduleId) {
-//     this.setState({moduleId: moduleId});
-//   }
-//
-//   setLessonId(lessonId) {
-//     this.setState({lessonId: lessonId});
-//   }
-//
-//   render() {
-//     return (<div className="container-fluid">
-//       {this.state.lessonId !== '' &&
-//         <ul className="nav nav-pills">
-//             <li className="nav-item pt-4">
-//               <a className="nav-link active">LessonId: {this.state.lessonId}</a>
-//             </li>
-//           </ul>
-//         }
-//       </div>);
-//   }
-// }
-//
-// export default Topics;
+import React from 'react';
+import {Link} from 'react-router-dom';
+
+class Topics extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setEditTopic = this.setEditTopic.bind(this);
+    this.state = {
+      topic: {
+        title: ''
+      }
+    };
+  }
+
+  setEditTopic(event) {
+    this.setState({
+      topic: {
+        title: event.target.value
+      }
+    });
+  }
+
+  //Can wrap link around whole component instead of title
+  render() {
+    return (<div className="bg-dark rounded-top" onClick={() => {
+        this.props.tabClick(this.props.topic.id);
+      }}>
+      <li className="nav-item">
+          <p className={this.props.isActiveTab
+              ? 'nav-link active bg-secondary'
+              : 'nav-link'}>
+              <span className="float-right">
+                <i className="fa fa-pencil pl-2 text-light"
+                  onClick={() => this.props.editClick(this.props.topic.id)}></i>
+                <i className="fa fa-times-circle pl-2 text-light"
+                  onClick={() => { this.props.delete(this.props.topic.id);
+                  }}></i>
+              </span>
+              <Link className="text-light" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topic.id}`}>
+            {
+              this.props.isEditTopic
+                ? <div>
+                    <span className="float-right ">
+                      <i className="fa fa-check mb-2" onClick={() => this.props.updateTopic(this.props.topic.id, this.state.topic)}></i>
+                    </span>
+                    <input className="form-control w-70" placeHolder="New topic title"
+                      value={this.state.topic.title} onChange={this.setEditTopic}/>
+                  </div>
+                : this.props.topic.title
+
+            }
+            </Link>
+          </p>
+      </li>
+    </div>);
+  }
+}
+
+export default Topics;

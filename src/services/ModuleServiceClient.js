@@ -1,8 +1,7 @@
 let _singleton = Symbol();
 const MODULE_COURSE_API_URL = 'http://localhost:8080/api/course/CID/module';
 const MODULE_ID_API_URL = 'http://localhost:8080/api/module/MID';
-//for find all modules
-//const MODULE_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/module';
+const MODULE_API_URL = 'http://localhost:8080/api/module';
 
 export default class ModuleService {
   constructor(singletonToken) {
@@ -13,6 +12,12 @@ export default class ModuleService {
     if (!this[_singleton])
       this[_singleton] = new ModuleService(_singleton);
     return this[_singleton];
+  }
+  findAllModules() {
+    return fetch(MODULE_API_URL)
+      .then(function(response) {
+        return response.json();
+      });
   }
 
   findAllModulesForCourse(courseId) {
