@@ -1,41 +1,44 @@
 let initialState = {
-  widgets: [{
+  widgets: [
+    {
+      title: 'Image Widget',
+      id: 6,
+      widgetType: 'IMAGE',
+      width: '550',
+      height: '315',
+      src: '',
+      text: '',
+    },
+    {
+      title: 'Paragraph Widget',
+      id: 5,
+      widgetType: 'PARAGRAPH',
+      text: '',
+    },
+    {
+      title: 'Link Widget',
+      id: 4,
+      widgetType: 'LINK',
+      src: '',
+      text: '',
+    },
+    {
       title: 'Youtube Widget',
       id: 3,
       widgetType: 'YOUTUBE',
       src: ''
     },
     {
-      title: 'List Widget 1',
+      title: 'List Widget',
       id: 2,
       widgetType: 'LIST',
       ordered: false,
       listItems: 'item1 \n item2 \n item3 \n'
     },
     {
-      title: 'Heading Widget 1',
+      title: 'Heading Widget',
       id: 1,
       widgetType: 'HEADING'
-    },
-    {
-      title: 'Widget 1',
-      id: 123,
-      widgetType: 'WT1'
-    },
-    {
-      title: 'Widget 2',
-      id: 234,
-      widgetType: 'WT2'
-    },
-    {
-      title: 'Widget 3',
-      id: 345,
-      widgetType: 'WT3'
-    },
-    {
-      title: 'Widget 4',
-      id: 456,
-      widgetType: 'WT1'
     },
   ]
 };
