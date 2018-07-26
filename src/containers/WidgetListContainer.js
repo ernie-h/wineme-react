@@ -1,22 +1,22 @@
 import {connect} from 'react-redux';
-import WidgetList from '../components/WidgetList';
+import WidgetList from '../components/widgets/WidgetList';
 
 const stateToPropertyMapper = state => ({
   widgets: state.widgets
 });
 
 const dispatcherToPropertyMapper = dispatch => ({
-  deleteWidget: wid => dispatch({
+  deleteWidget: widgetId => dispatch({
     type: 'DELETE_WIDGET',
-    widgetId: wid
-  }),
-  createWidget: w => dispatch({
+    widgetId: widgetId
+    }),
+  createWidget: widget => dispatch({
     type: 'CREATE_WIDGET',
-    widget: w
+    widget: widget
   }),
-  updateWidget: w => dispatch({
+  updateWidget: widget => dispatch({
     type: 'UPDATE_WIDGET',
-    widget: w
+    widget: widget
   }),
   saveWidgets: () => dispatch({
     type: 'SAVE_WIDGETS',

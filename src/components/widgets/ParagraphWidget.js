@@ -1,0 +1,24 @@
+import React from 'react'
+
+export const ParagraphWidget = ({widget, updateWidget}) => {
+  let text;
+  return(
+    <div>
+      <h3>Paragraph Widget - {widget.title}</h3>
+        <p>Please enter he topic description: </p>
+        <textarea ref={node => text = node}
+          className='form-control'
+          placeholder="This topic focuses on..."
+          onChange={() => {
+            widget.text = text.value;
+            updateWidget(widget);
+          }}/>
+
+
+      <h4> Preview: </h4>
+      <p className="form-control">
+        {widget.text}
+      </p>
+    </div>
+  );
+};
