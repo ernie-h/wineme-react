@@ -1,9 +1,12 @@
+import WidgetServiceClient from '../services/WidgetServiceClient'
+
+let widgetService = WidgetServiceClient.instance;
+
 let initialState = {
-  widgets: [
-    {
+  widgets: [{
       title: 'Image Widget',
       id: 6,
-      widgetType: 'IMAGE',
+      widget_type: 'IMAGE',
       width: '550',
       height: '315',
       src: '',
@@ -12,33 +15,33 @@ let initialState = {
     {
       title: 'Paragraph Widget',
       id: 5,
-      widgetType: 'PARAGRAPH',
+      widget_type: 'PARAGRAPH',
       text: '',
     },
     {
       title: 'Link Widget',
       id: 4,
-      widgetType: 'LINK',
+      widget_type: 'LINK',
       src: '',
       text: '',
     },
     {
       title: 'Youtube Widget',
       id: 3,
-      widgetType: 'YOUTUBE',
+      widget_type: 'YOUTUBE',
       src: ''
     },
     {
       title: 'List Widget',
       id: 2,
-      widgetType: 'LIST',
+      widget_type: 'LIST',
       ordered: false,
       listItems: 'item1 \n item2 \n item3 \n'
     },
     {
       title: 'Heading Widget',
-      id: 1,
-      widgetType: 'HEADING'
+      id: 11,
+      widget_type: 'HEADING'
     },
   ]
 };
@@ -72,13 +75,16 @@ export const WidgetReducer = (
         })
       };
     case 'SAVE_WIDGETS':
-      fetch('http://localhost:8080/api/widget/save', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(state.widgets)
-      });
+      console.log("Save widgets hit");
+      widgetService.saveAllWidgets(state.widgets);
+      console.log("Save widgets ran");
+      console.log(state);
+      return {
+        state
+      };
+    case 'FIND_WIDGETS_FOR_TOPIC':
+      state = widgetService.findAllWidgetsForTopic(action.topicId);
+      console.log("state " + state)
       return {
         state
       };

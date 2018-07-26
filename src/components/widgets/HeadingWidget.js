@@ -9,7 +9,7 @@ export const HeadingWidget = ({widget, updateWidget}) => {
       <input  onChange={()=> {
           widget.text = text.value;
           updateWidget(widget);
-        }} ref={node => text = node} className="form-control" placeHolder="heading text"/>
+        }} ref={node => text = node} className="form-control" placeholder="heading text"/>
       <label> Heading Size</label>
       <select onChange={() => {
           widget.size = size.value;

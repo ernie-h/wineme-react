@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import WidgetListContainer from '../containers/WidgetListContainer';
 
 class Topics extends React.Component {
@@ -43,7 +43,7 @@ class Topics extends React.Component {
                     <span className="float-right ">
                       <i className="fa fa-check mb-2" onClick={() => this.props.updateTopic(this.props.topic.id, this.state.topic)}></i>
                     </span>
-                    <input className="form-control w-70" placeHolder="New topic title"
+                    <input className="form-control w-70" placeholder="New topic title"
                       value={this.state.topic.title} onChange={this.setEditTopic}/>
                   </div>
                 : this.props.topic.title
@@ -51,7 +51,7 @@ class Topics extends React.Component {
             }
             </Link>
           </p>
-          <WidgetListContainer />
+          <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={WidgetListContainer}/>
       </li>
     </div>);
   }

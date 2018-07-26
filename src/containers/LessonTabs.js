@@ -42,7 +42,7 @@ class LessonTabs extends React.Component {
                     <span className="float-right ">
                       <i className="fa fa-check mb-2" onClick={() => this.props.updateLesson(this.props.lesson.id, this.state.lesson)}></i>
                     </span>
-                    <input className="form-control w-70" placeHolder="New lesson title"
+                    <input className="form-control w-70" placeholder="New lesson title"
                       value={this.state.lesson.title} onChange={this.setEditLesson}/>
                   </div>
                 : this.props.lesson.title

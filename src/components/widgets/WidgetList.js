@@ -6,9 +6,15 @@ import {YouTubeWidget} from './YouTubeWidget';
 import {ParagraphWidget} from './ParagraphWidget';
 import {ImageWidget} from './ImageWidget'
 
-const WidgetList = ({widgets, saveWidgets, deleteWidget, createWidget, updateWidget}) => {
+const WidgetList = ({topicId, widgets, saveWidgets, findAllWidgetsForTopic,  deleteWidget, createWidget, updateWidget}) => {
   let widgetTitle;
-  let widgetType;
+  let widget_type;
+  console.log('topicid ' + topicId);
+  //findAllWidgetsForTopic(topicId);
+  let widgetsForTopic = (topicId) => {
+    findAllWidgetsForTopic(topicId);
+  }
+
   return (<div className="bg-secondary rounded">
     <button className="btn btn-primary float-right" onClick={saveWidgets}>
       Save</button>
@@ -23,7 +29,7 @@ const WidgetList = ({widgets, saveWidgets, deleteWidget, createWidget, updateWid
             let widget = {
               title: widgetTitle.value,
               id: (new Date()).getTime(),
-              widgetType: widgetType.value,
+              widget_type: widget_type.value,
               // CAN MOVE THESE TO A SEPARATE CREATE FUNCTION THAT CREATES Widget BASED ON TYPE
               ordered: false,
               listItems: '',
@@ -35,7 +41,7 @@ const WidgetList = ({widgets, saveWidgets, deleteWidget, createWidget, updateWid
           Add Widget
         </button>
       </div>
-        <select ref={node => widgetType = node} className="form-control">
+        <select ref={node => widget_type = node} className="form-control">
           <option value="LINK">Link Widget</option>
           <option value="PARAGRAPH">Paragraph Widget</option>
           <option value="IMAGE">Image Widget</option>
@@ -48,17 +54,17 @@ const WidgetList = ({widgets, saveWidgets, deleteWidget, createWidget, updateWid
       {
         widgets.map((widget, index) => <li className="list-group-item text-dark" key={index}>
           {widget.title}
-          ({widget.id}) - {widget.widgetType}
+          ({widget.id}) - {widget.widget_type}
           <button className="float-right btn btn-danger" onClick={() => deleteWidget(widget.id)}>
             Delete
           </button>
           <div>
-            {widget.widgetType === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={updateWidget}/>}
-            {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={updateWidget}/>}
-            {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={updateWidget}/>}
-            {widget.widgetType === 'LINK' && <LinkWidget widget={widget} updateWidget={updateWidget}/>}
-            {widget.widgetType === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={updateWidget}/>}
-            {widget.widgetType === 'IMAGE' && <ImageWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'LIST' && <ListWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'HEADING' && <HeadingWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'LINK' && <LinkWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={updateWidget}/>}
+            {widget.widget_type === 'IMAGE' && <ImageWidget widget={widget} updateWidget={updateWidget}/>}
           </div>
         </li>)
       }
