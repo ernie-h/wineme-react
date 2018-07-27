@@ -1,52 +1,14 @@
-let initialState = {
-  widgets: [
-    {
-      title: 'Image Widget',
-      id: 6,
-      widgetType: 'IMAGE',
-      width: '550',
-      height: '315',
-      src: '',
-      text: '',
-    },
-    {
-      title: 'Paragraph Widget',
-      id: 5,
-      widgetType: 'PARAGRAPH',
-      text: '',
-    },
-    {
-      title: 'Link Widget',
-      id: 4,
-      widgetType: 'LINK',
-      src: '',
-      text: '',
-    },
-    {
-      title: 'Youtube Widget',
-      id: 3,
-      widgetType: 'YOUTUBE',
-      src: ''
-    },
-    {
-      title: 'List Widget',
-      id: 2,
-      widgetType: 'LIST',
-      ordered: false,
-      listItems: 'item1 \n item2 \n item3 \n'
-    },
-    {
-      title: 'Heading Widget',
-      id: 1,
-      widgetType: 'HEADING'
-    },
-  ]
-};
+import WidgetServiceClient from '../services/WidgetServiceClient';
+
+let widgetService = WidgetServiceClient.instance;
 
 export const WidgetReducer = (
-  state = initialState,
+  state = {
+    widgets:[]
+  },
   action) => {
-
+  // let fromIndex;
+  // let toIndex;
   switch (action.type) {
     case 'DELETE_WIDGET':
       return {
@@ -72,16 +34,33 @@ export const WidgetReducer = (
         })
       };
     case 'SAVE_WIDGETS':
-      fetch('http://localhost:8080/api/widget/save', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(state.widgets)
-      });
       return {
-        state
+        widgets: action.widgets
       };
+    case 'FIND_WIDGETS_FOR_TOPIC':
+      return {
+        widgets: action.widgets
+      };
+      //   case 'FIND_ALL_WIDGETS':
+      //     state = widgetService.findAllWidgets();
+      //     return {
+      //       state
+      //     };
+      //   case 'UP':
+      //     console.log(action.widgetId)
+      //     fromIndex = state.widgets.findIndex((widget) => widget.id);
+      //     toIndex = fromIndex--;
+      //     state.widgets.splice(toIndex, 0, state.widgets.splice);
+      //     let widgets = Object.assign(state.widgets)
+      //
+      //     return {
+      //       widgets: widgets
+      //     };
+      //   case 'DOWN':
+      //     console.log(action.widgetId)
+      //     return {
+      //       state
+      //     };
     default:
       return state;
   }

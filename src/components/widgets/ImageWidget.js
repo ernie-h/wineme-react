@@ -20,10 +20,13 @@ export const ImageWidget = ({widget, updateWidget}) => {
 
     <h4>Preview
     </h4>
-    {
-      widget.src && <img className="form-control" width="560" height="315"
-       src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;
-       encrypted-media" allowfullscreen="allowfullscreen"/>
+    <div className="form-control">
+      {
+        widget.src && <img width="560" height="315"
+        src={widget.src}/>
     }
+    <br/>
+      {widget.text}
+    </div>
   </div>);
 };

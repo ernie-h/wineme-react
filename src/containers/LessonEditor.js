@@ -131,17 +131,6 @@ class LessonEditor extends React.Component {
     return topics;
   }
 
-  //PREVIOUS RENDER FOR TOPIC PILLS
-  //   <div className="container-fluid">
-  //   {
-  //     this.state.lessonId !== '' && <ul className="nav nav-pills">
-  //         <li className="nav-item pt-4">
-  //           <a className="nav-link active">LessonId: {this.state.lessonId}</a>
-  //         </li>
-  //       </ul>
-  //   }
-  // </div>);
-
   render() {
     return (<div className="pb-5 pr-0 mr-0 bg-dark rounded text-light">
     <div className="row pt-4 mr-5">
@@ -160,24 +149,6 @@ class LessonEditor extends React.Component {
     </div>);
 
   }
-  // {
-  //   this.state.lessonId !== '' &&
-  //   <div>
-  //   <div className="row pt-4 mr-5">
-  //       <div className="col-3">
-  //         <input onChange={this.setTopicTitle} value={this.state.topic.title} className="form-control bg-light" placeholder="New topic"/>
-  //       </div>
-  //       <div className="col-1">
-  //         <button className="btn btn-secondary btn-block" onClick={this.createTopic}>
-  //           <i className="fa fa-plus"></i>
-  //         </button>
-  //       </div>
-  //     </div>
-  //     <ul className="nav nav-tabs pt-3">
-  //       {this.renderListOfTopics()}
-  //     </ul>
-  //   </div>
-  // }
 }
 
 export default LessonEditor;

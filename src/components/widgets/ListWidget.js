@@ -2,7 +2,7 @@ import React from 'react';
 
 export const ListWidget = ({widget, updateWidget}) => {
   let text;
-  let order;
+
   return (<div>
     <h3>
       List Widget</h3>
@@ -12,16 +12,16 @@ export const ListWidget = ({widget, updateWidget}) => {
       }} className='form-control' value={widget.listItems}></textarea>
 
     <label>
-      <input ref={node => order = node} checked={widget.ordered} type="checkbox" onClick={() => {
-          widget.ordered = order.checked;
+      <input checked={widget.ordered === 'ORDERED'}
+        type="checkbox" onClick={() => {
+          widget.ordered = widget.ordered === 'ORDERED'? 'UNORDERED': 'ORDERED';
           updateWidget(widget);
         }}/>
       Ordered
     </label>
 
     <h4>Preview</h4>
-    {
-      !widget.ordered
+    {widget.ordered === 'UNORDERED'
         ? <ul>
             {
               widget.listItems.split('\n').map((item, index) => (<li key={index}>
