@@ -1,5 +1,9 @@
 import {connect} from 'react-redux';
 import WidgetList from '../components/widgets/WidgetList';
+import WidgetServiceClient from '../services/WidgetServiceClient';
+
+let widgetService = WidgetServiceClient.instance;
+
 
 const stateToPropertyMapper = (state, ownProps) => ({
   widgets: state.widgets,
@@ -19,13 +23,36 @@ const dispatcherToPropertyMapper = dispatch => ({
     type: 'UPDATE_WIDGET',
     widget: widget
   }),
-  saveWidgets: () => dispatch({
+  saveWidgets: (widgets) =>
+  widgetService.saveAllWidgets(widgets)
+  .then((widgets) => dispatch({
     type: 'SAVE_WIDGETS',
-  }),
-  findAllWidgetsForTopic: (topicId) => dispatch({
+    widgets: widgets
+  })),
+  findAllWidgetsForTopic: (topicId) =>
+  widgetService.findAllWidgetsForTopic(topicId)
+  .then((widgets) => dispatch({
     type: 'FIND_WIDGETS_FOR_TOPIC',
-    topicId: topicId,
-  })
+    widgets: widgets
+  })),
+
+  // loadAllWidgets: () => dispatch({
+  //   fetch('http://localhost:8080/api/widget')
+  //   .then(response => response.json())
+  //   .then(widgets => dispatch({
+  //     type: 'FIND_ALL_WIDGETS',
+  //     widgets: widgets
+  //   }) )
+  // }),
+
+  // up: (widgetId) => dispatch({
+  //   type: 'UP',
+  //   widgetId: widgetId,
+  // }),
+  // down: (widgetId) => dispatch({
+  //   type: 'DOWN',
+  //   widgetId: widgetId,
+  // }),
 });
 
 const WidgetListContainer =

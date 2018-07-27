@@ -5,14 +5,14 @@ const WIDGET_SAVE_URL = 'http://localhost:8080/api/widget/save';
 //for find all topics
 // const LESSON_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson';
 
-export default class WidgetService {
+export default class WidgetServiceClient {
   constructor(singletonToken) {
     if (_singleton !== singletonToken)
       throw new Error('Singleton!!!');
   }
   static get instance() {
     if (!this[_singleton])
-      this[_singleton] = new WidgetService(_singleton);
+      this[_singleton] = new WidgetServiceClient(_singleton);
     return this[_singleton];
   }
 
