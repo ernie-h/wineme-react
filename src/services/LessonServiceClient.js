@@ -44,8 +44,6 @@ export default class LessonService {
   }
 
   updateLesson(lessonId, lesson) {
-    console.log(lessonId)
-    console.log(lesson)
     return fetch(LESSON_ID_API_URL.replace('LID', lessonId), {
       method: 'PUT',
       body: JSON.stringify(lesson),
