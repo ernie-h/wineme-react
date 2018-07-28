@@ -20,13 +20,14 @@ const dispatcherToPropertyMapper = dispatch => ({
       widgetId: widgetId
     }))
 ,
-  createWidget: (topicId, name, className) =>
+  createWidget: (topicId, name, className, widgetsLength) =>
     widgetService.createWidget(topicId, {
       topicId: topicId,
       name: name,
       className: className,
       listItems: '',
-      ordered: ''
+      ordered: '',
+      location: widgetsLength + 1,
     })
     .then((widget) =>
       dispatch({
@@ -49,24 +50,14 @@ const dispatcherToPropertyMapper = dispatch => ({
       type: 'FIND_WIDGETS_FOR_TOPIC',
       widgets: widgets
     })),
-
-  // loadAllWidgets: () => dispatch({
-  //   fetch('http://localhost:8080/api/widget')
-  //   .then(response => response.json())
-  //   .then(widgets => dispatch({
-  //     type: 'FIND_ALL_WIDGETS',
-  //     widgets: widgets
-  //   }) )
-  // }),
-
-  // up: (widgetId) => dispatch({
-  //   type: 'UP',
-  //   widgetId: widgetId,
-  // }),
-  // down: (widgetId) => dispatch({
-  //   type: 'DOWN',
-  //   widgetId: widgetId,
-  // }),
+  moveUp: (widget) => dispatch({
+    type: 'MOVE_UP',
+    widget: widget,
+  }),
+  moveDown: (widget) => dispatch({
+    type: 'MOVE_DOWN',
+    widget: widget,
+  }),
 });
 
 const WidgetListContainer =

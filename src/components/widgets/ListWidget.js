@@ -4,8 +4,8 @@ export const ListWidget = ({widget, updateWidget}) => {
   let text;
 
   return (<div>
-    <h3>
-      List Widget</h3>
+    <h3>List</h3>
+      <h4 > {widget.name}</h4>
     <textarea ref={node => text = node} onChange={() => {
         widget.listItems = text.value;
         updateWidget(widget);
