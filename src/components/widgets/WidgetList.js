@@ -9,47 +9,29 @@ import {ImageWidget} from './ImageWidget'
 class WidgetList extends React.Component {
   constructor(props) {
     super(props);
-    let widgetTitle;
+    let name;
     let className;
-    // console.log('topicid ' + topicId);
-    // //findAllWidgetsForTopic(topicId);
-    // let widgetsForTopic = (topicId) => {
-    //   findAllWidgetsForTopic(topicId);
-    // }
     this.props.findAllWidgetsForTopic(this.props.topicId);
 
   }
-  componentDidMount() {
-    this.props.findAllWidgetsForTopic(this.props.topicId);
 
-  }
   render() {
     return (<div className="bg-secondary rounded">
       <button className="btn btn-primary float-right"
-        onClick={() => this.props.saveWidgets(this.props.widgets)
-          .then(this.props.findAllWidgetsForTopic(this.props.topicId))}>
+        onClick={() => this.props.saveWidgets(this.props.widgets, this.props.topicId)}>
         Save</button>
       <h1>Widget List: ({this.props.widgets.length})</h1>
-
       <ul className="list-group text-dark">
         <li className="list-group-item">
           <h3>
             Add Widget:
           </h3>
           <div className="form-inline">
-            <input ref={node => this.widgetTitle = node} className="form-control"/>
+            <input ref={node => this.name = node} className="form-control"/>
             <button className="btn btn-success float-right" onClick={() => {
-                let widget = {
-                  title: this.widgetTitle.value,
-                  id: (new Date()).getTime(),
-                  className: this.className.value,
-                  // CAN MOVE THESE TO A SEPARATE CREATE FUNCTION THAT CREATES Widget BASED ON TYPE
-                  ordered: false,
-                  listItems: '',
-                  src: ''
-                };
-                this.widgetTitle.value = '';
-                this.props.createWidget(widget);
+                this.props.createWidget(this.props.topicId, this.name.value, this.className.value);
+                this.name.value = '';
+                this.className.value = '';
               }}>
               Add Widget
             </button>
@@ -63,7 +45,6 @@ class WidgetList extends React.Component {
             <option value="YOUTUBE">YOUTUBE</option>
           </select>
         </li>
-
         {
           this.props.widgets.map((widget, index) => <li className="list-group-item text-dark" key={index}>
             {widget.title}

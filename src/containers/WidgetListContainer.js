@@ -1,4 +1,6 @@
-import {connect} from 'react-redux';
+import {
+  connect
+} from 'react-redux';
 import WidgetList from '../components/widgets/WidgetList';
 import WidgetServiceClient from '../services/WidgetServiceClient';
 
@@ -11,30 +13,42 @@ const stateToPropertyMapper = (state, ownProps) => ({
 });
 
 const dispatcherToPropertyMapper = dispatch => ({
-  deleteWidget: widgetId => dispatch({
-    type: 'DELETE_WIDGET',
-    widgetId: widgetId
-    }),
-  createWidget: (widget) => dispatch({
-    type: 'CREATE_WIDGET',
-    widget: widget
-  }),
+  deleteWidget: (widgetId) =>
+  widgetService.deleteWidget(widgetId)
+  .then(dispatch({
+      type: 'DELETE_WIDGET',
+      widgetId: widgetId
+    }))
+,
+  createWidget: (topicId, name, className) =>
+    widgetService.createWidget(topicId, {
+      topicId: topicId,
+      name: name,
+      className: className,
+      listItems: '',
+      ordered: ''
+    })
+    .then((widget) =>
+      dispatch({
+        type: 'CREATE_WIDGET',
+        widget: widget
+      })),
   updateWidget: (widget) => dispatch({
     type: 'UPDATE_WIDGET',
     widget: widget
   }),
-  saveWidgets: (widgets) =>
-  widgetService.saveAllWidgets(widgets)
-  .then((widgets) => dispatch({
-    type: 'SAVE_WIDGETS',
-    widgets: widgets
-  })),
+  saveWidgets: (widgets, topicId) =>
+    widgetService.saveAllWidgets(widgets, topicId)
+    .then((widgets) => dispatch({
+      type: 'SAVE_WIDGETS',
+      widgets: widgets
+    })),
   findAllWidgetsForTopic: (topicId) =>
-  widgetService.findAllWidgetsForTopic(topicId)
-  .then((widgets) => dispatch({
-    type: 'FIND_WIDGETS_FOR_TOPIC',
-    widgets: widgets
-  })),
+    widgetService.findAllWidgetsForTopic(topicId)
+    .then((widgets) => dispatch({
+      type: 'FIND_WIDGETS_FOR_TOPIC',
+      widgets: widgets
+    })),
 
   // loadAllWidgets: () => dispatch({
   //   fetch('http://localhost:8080/api/widget')
@@ -56,6 +70,6 @@ const dispatcherToPropertyMapper = dispatch => ({
 });
 
 const WidgetListContainer =
-  connect(stateToPropertyMapper,dispatcherToPropertyMapper)(WidgetList);
+  connect(stateToPropertyMapper, dispatcherToPropertyMapper)(WidgetList);
 
 export default WidgetListContainer;
