@@ -4,11 +4,10 @@ let widgetService = WidgetServiceClient.instance;
 
 export const WidgetReducer = (
   state = {
-    widgets:[]
+    widgets: []
   },
   action) => {
-  // let fromIndex;
-  // let toIndex;
+  let index;
   switch (action.type) {
     case 'DELETE_WIDGET':
       return {
@@ -41,26 +40,23 @@ export const WidgetReducer = (
       return {
         widgets: action.widgets
       };
-      //   case 'FIND_ALL_WIDGETS':
-      //     state = widgetService.findAllWidgets();
-      //     return {
-      //       state
-      //     };
-      //   case 'UP':
-      //     console.log(action.widgetId)
-      //     fromIndex = state.widgets.findIndex((widget) => widget.id);
-      //     toIndex = fromIndex--;
-      //     state.widgets.splice(toIndex, 0, state.widgets.splice);
-      //     let widgets = Object.assign(state.widgets)
-      //
-      //     return {
-      //       widgets: widgets
-      //     };
-      //   case 'DOWN':
-      //     console.log(action.widgetId)
-      //     return {
-      //       state
-      //     };
+    case 'FIND_ALL_WIDGETS':
+      state = widgetService.findAllWidgets();
+      return {
+        state
+      };
+    case 'MOVE_UP':
+      index = state.widgets.indexOf(action.widget);
+      state.widgets.splice(index - 1, 0, state.widgets.splice(index, 1)[0]);
+      return {
+        widgets: state.widgets.splice(0)
+      };
+    case 'MOVE_DOWN':
+      index = state.widgets.indexOf(action.widget);
+      state.widgets.splice(index + 1, 0, state.widgets.splice(index, 1)[0]);
+      return {
+        widgets: state.widgets.splice(0)
+      };
     default:
       return state;
   }

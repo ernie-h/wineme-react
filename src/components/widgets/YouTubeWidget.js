@@ -3,7 +3,8 @@ import React from 'react';
 export const YouTubeWidget = ({widget, updateWidget}) => {
   let src;
   return( <div>
-    <h3>YouTubeWidget</h3>
+    <h3>YouTube</h3>
+      <h4 > {widget.name}</h4>
     <p>Please paste Youtube video Id here: </p>
     <input ref={node => src = node}
       id="URL"

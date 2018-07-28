@@ -4,7 +4,8 @@ export const ImageWidget = ({widget, updateWidget}) => {
   let src;
   let text;
   return (<div>
-    <h3>Image Widget</h3>
+    <h3>Image</h3>
+    <h4 > {widget.name}</h4>
     <p>Please paste Image link here:
     </p>
     <input ref={node => src = node} id="URL" className='form-control' placeholder="www.../img" onChange={() => {

@@ -5,7 +5,8 @@ export const LinkWidget = ({widget, updateWidget}) => {
   let text;
   return(
     <div>
-      <h3>Link Widget - {widget.title}</h3>
+      <h3>Link </h3>
+        <h4 > {widget.name}</h4>
         <p>Please enter the link text here: </p>
         <input ref={node => text = node}
           className='form-control'

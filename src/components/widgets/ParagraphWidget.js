@@ -4,7 +4,8 @@ export const ParagraphWidget = ({widget, updateWidget}) => {
   let text;
   return(
     <div>
-      <h3>Paragraph Widget - {widget.title}</h3>
+      <h3>Paragraph</h3>
+        <h4 > {widget.name}</h4>
         <p>Please enter he topic description: </p>
         <textarea ref={node => text = node}
           className='form-control'

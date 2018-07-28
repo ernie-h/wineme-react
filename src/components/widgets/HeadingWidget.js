@@ -4,7 +4,8 @@ export const HeadingWidget = ({widget, updateWidget}) => {
   let text;
   let size;
   return(<div>
-    <h3>Heading Widget</h3>
+    <h3>Heading</h3>
+    <h4> {widget.name}</h4>
     <label> Heading text</label>
       <input  onChange={()=> {
           widget.text = text.value;
