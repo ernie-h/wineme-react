@@ -10,6 +10,7 @@ let widgetService = WidgetServiceClient.instance;
 const stateToPropertyMapper = (state, ownProps) => ({
   widgets: state.widgets,
   topicId: ownProps.match.params.topicId,
+  preview: state.preview
 });
 
 const dispatcherToPropertyMapper = dispatch => ({
@@ -58,6 +59,10 @@ const dispatcherToPropertyMapper = dispatch => ({
     type: 'MOVE_DOWN',
     widget: widget,
   }),
+  previewMode: () => dispatch({
+    type: 'PREVIEW_MODE',
+  })
+  ,
 });
 
 const WidgetListContainer =
