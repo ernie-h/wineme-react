@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link, Route} from 'react-router-dom';
-import WidgetListContainer from '../containers/WidgetListContainer';
 
 class Topics extends React.Component {
   constructor(props) {
@@ -51,9 +50,9 @@ class Topics extends React.Component {
             }
             </Link>
           </p>
-          <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={WidgetListContainer}/>
       </li>
-    </div>);
+    </div>
+  );
   }
 }
 

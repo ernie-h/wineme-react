@@ -4,7 +4,8 @@ let widgetService = WidgetServiceClient.instance;
 
 export const WidgetReducer = (
   state = {
-    widgets: []
+    widgets: [],
+    preview: false
   },
   action) => {
   let index;
@@ -57,6 +58,13 @@ export const WidgetReducer = (
       return {
         widgets: state.widgets.splice(0)
       };
+    case 'PREVIEW_MODE':
+    console.log(state.preview)
+      return {
+        widgets: state.widgets,
+        preview: !state.preview
+      };
+
     default:
       return state;
   }

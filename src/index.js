@@ -4,9 +4,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
 
 import CourseManager from './containers/CourseManager';
 import {WidgetReducer} from './reducers/WidgetReducer';
