@@ -12,8 +12,15 @@ class WidgetList extends React.Component {
     super(props);
     let name;
     let className;
+  }
 
-    this.props.findAllWidgetsForTopic(this.props.topicId);
+  componentDidMount() {
+    this.props.findAllWidgetsForTopic(this.props.match.params.topicId);
+  }
+
+  componentWillReceiveProps(newProps){
+    if(newProps.match.params.topicId != this.props.match.params.topicId)
+      this.props.findAllWidgetsForTopic(newProps.match.params.topicId);
   }
 
   moveHandler(widget, isUp) {
@@ -31,7 +38,7 @@ class WidgetList extends React.Component {
       <h2 className="display-4 ml-2 mt-2">Widgets:</h2>
 
       <ul className="list-group text-dark">
-        <li className="list-group-item">
+        <li className="list-group-item bg-light">
           <div className="row mb-3">
             <div className="col">
               <h2 className="disply-4">
@@ -40,15 +47,17 @@ class WidgetList extends React.Component {
             </div>
             <div className="col">
               <div className="form-inline float-right">
-                <p className="mt-1">
+                <p className="text-light mt-2">
                   Preview</p>
                 {
                   this.props.preview
-                    ? <i className="fa fa-toggle-on mb-2 ml-1" onClick={() => this.props.previewMode()}/>
-                    : <i className="fa fa-toggle-off mb-2 ml-1" onClick={() => this.props.previewMode()}/>
+                    ? <i className="fa fa-toggle-on mb-2 ml-1 text-light" onClick={() => this.props.previewMode()}/>
+                    : <i className="fa fa-toggle-off mb-2 ml-1 text-light" onClick={() => this.props.previewMode()}/>
                 }
 
-                <button className="btn btn-primary ml-4 mr-2 mb-2" onClick={() => this.props.saveWidgets(this.props.widgets, this.props.topicId)}>
+                <button className="btn btn-primary ml-4 mr-2 mb-2"
+                  onClick={() => this.props.saveWidgets(this.props.widgets, this.props.match.params.topicId)
+                  .then(alert('Successfuly saved.'))}>
                   Save
                 </button>
               </div>
@@ -62,7 +71,7 @@ class WidgetList extends React.Component {
                 } else if (this.className.value === '') {
                   alert('Please select a widget type.');
                 } else {
-                  this.props.createWidget(this.props.topicId, this.name.value, this.className.value, this.props.widgets.length);
+                  this.props.createWidget(this.props.match.params.topicId, this.name.value, this.className.value, this.props.widgets.length);
                   this.name.value = '';
                   this.className.value = '';
                 }
@@ -87,7 +96,7 @@ class WidgetList extends React.Component {
           </select>
         </li>
         {
-          this.props.widgets.map((widget, index) => <li className="list-group-item text-dark" key={index}>
+          this.props.widgets.map((widget, index) => <li className="list-group-item bg-light text-dark" key={index}>
             {
               !this.props.preview && <div>
                   <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>

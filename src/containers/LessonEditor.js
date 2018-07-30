@@ -3,8 +3,13 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import TopicServiceClient from '../services/TopicServiceClient'
 import Topics from '../components/Topics';
 import WidgetListContainer from './WidgetListContainer';
+import {WidgetReducer} from '../reducers/WidgetReducer'
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
+let store = createStore(WidgetReducer);
 class LessonEditor extends React.Component {
+
   constructor(props) {
     super(props);
     this.createTopic = this.createTopic.bind(this);
@@ -38,6 +43,7 @@ class LessonEditor extends React.Component {
   }
 
   componentDidMount() {
+
     this.setCourseId(this.props.match.params.courseId);
     this.setModuleId(this.props.match.params.moduleId);
     this.setLessonId(this.props.match.params.lessonId);
@@ -147,8 +153,10 @@ class LessonEditor extends React.Component {
       <ul className="nav nav-pills nav-justfied pt-3">
         {this.renderListOfTopics()}
       </ul>
+      <Provider store={store}>
       <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={WidgetListContainer}/>
-    </div>);
+</Provider>
+</div>);
 
   }
 }
