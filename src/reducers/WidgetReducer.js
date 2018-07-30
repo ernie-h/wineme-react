@@ -47,19 +47,27 @@ export const WidgetReducer = (
         state
       };
     case 'MOVE_UP':
-      index = state.widgets.indexOf(action.widget);
+      index = action.widget.location;
       state.widgets.splice(index - 1, 0, state.widgets.splice(index, 1)[0]);
       return {
         widgets: state.widgets.splice(0)
       };
     case 'MOVE_DOWN':
-      index = state.widgets.indexOf(action.widget);
+      index = action.widget.location;
       state.widgets.splice(index + 1, 0, state.widgets.splice(index, 1)[0]);
       return {
         widgets: state.widgets.splice(0)
       };
+      case 'UPDATE_LOCATION':
+      state.widgets.map((widget) => {
+        let index = state.widgets.indexOf(widget);
+        if(widget.location != index)
+        widget.location = index;
+      });
+        return {
+          widgets: state.widgets
+        };
     case 'PREVIEW_MODE':
-    console.log(state.preview)
       return {
         widgets: state.widgets,
         preview: !state.preview

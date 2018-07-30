@@ -28,7 +28,7 @@ const dispatcherToPropertyMapper = dispatch => ({
       className: className,
       listItems: '',
       ordered: '',
-      location: widgetsLength + 1,
+      location: widgetsLength,
     })
     .then((widget) =>
       dispatch({
@@ -40,6 +40,7 @@ const dispatcherToPropertyMapper = dispatch => ({
     widget: widget
   }),
   saveWidgets: (widgets, topicId) =>
+
     widgetService.saveAllWidgets(widgets, topicId)
     .then((widgets) => dispatch({
       type: 'SAVE_WIDGETS',
@@ -59,6 +60,11 @@ const dispatcherToPropertyMapper = dispatch => ({
     type: 'MOVE_DOWN',
     widget: widget,
   }),
+  updateLocation: (widgets) => dispatch({
+    type: 'UPDATE_LOCATION',
+    widgets: widgets,
+  }),
+
   previewMode: () => dispatch({
     type: 'PREVIEW_MODE',
   })
