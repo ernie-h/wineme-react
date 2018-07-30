@@ -7,10 +7,10 @@ import WidgetServiceClient from '../services/WidgetServiceClient';
 let widgetService = WidgetServiceClient.instance;
 
 
-const stateToPropertyMapper = (state, ownProps) => ({
+const stateToPropertyMapper = (state) => ({
   widgets: state.widgets,
-  topicId: ownProps.match.params.topicId,
-  preview: state.preview
+  preview: state.preview,
+  topicId: state.topicId
 });
 
 const dispatcherToPropertyMapper = dispatch => ({
@@ -33,7 +33,8 @@ const dispatcherToPropertyMapper = dispatch => ({
     .then((widget) =>
       dispatch({
         type: 'CREATE_WIDGET',
-        widget: widget
+        widget: widget,
+        topicId: topicId
       })),
   updateWidget: (widget) => dispatch({
     type: 'UPDATE_WIDGET',
@@ -44,13 +45,15 @@ const dispatcherToPropertyMapper = dispatch => ({
     widgetService.saveAllWidgets(widgets, topicId)
     .then((widgets) => dispatch({
       type: 'SAVE_WIDGETS',
-      widgets: widgets
+      widgets: widgets,
+      topicId: topicId
     })),
   findAllWidgetsForTopic: (topicId) =>
     widgetService.findAllWidgetsForTopic(topicId)
     .then((widgets) => dispatch({
       type: 'FIND_WIDGETS_FOR_TOPIC',
-      widgets: widgets
+      widgets: widgets,
+      topicId: topicId
     })),
   moveUp: (widget) => dispatch({
     type: 'MOVE_UP',

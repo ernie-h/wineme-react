@@ -17,7 +17,7 @@ export const YouTubeWidget = ({widget, updateWidget, preview}) => {
           updateWidget(widget);
         }}/>
 
-      <h4>Preview
+      <h4 className="mt-2">Preview
       </h4>
       {
         widget.src && <iframe width="560" height="315" src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;

@@ -5,7 +5,8 @@ let widgetService = WidgetServiceClient.instance;
 export const WidgetReducer = (
   state = {
     widgets: [],
-    preview: false
+    preview: false,
+    topicId: ''
   },
   action) => {
   let index;
@@ -14,14 +15,16 @@ export const WidgetReducer = (
       return {
         widgets: state.widgets.filter(
           widget => widget.id !== action.widgetId
-        )
+        ),
+        topicId: action.widget.topicId
       };
     case 'CREATE_WIDGET':
       return {
         widgets: [
           action.widget,
           ...state.widgets
-        ]
+        ],
+        topicId: action.topicId
       };
     case 'UPDATE_WIDGET':
       return {
@@ -35,11 +38,13 @@ export const WidgetReducer = (
       };
     case 'SAVE_WIDGETS':
       return {
-        widgets: action.widgets
+        widgets: action.widgets,
+        topicId: action.topicId
       };
     case 'FIND_WIDGETS_FOR_TOPIC':
       return {
-        widgets: action.widgets
+        widgets: action.widgets,
+        topicId: action.topicId
       };
     case 'FIND_ALL_WIDGETS':
       state = widgetService.findAllWidgets();
