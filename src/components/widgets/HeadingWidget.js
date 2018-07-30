@@ -27,6 +27,8 @@ export const HeadingWidget = ({widget, updateWidget, preview}) => {
           widget.size = parseInt(size.value);
           updateWidget(widget);
         }} ref={node => size = node} className="form-control">
+        <option value="" selected="selected" disabled="disabled" hidden="hidden">
+          Choose Heading size</option>
         <option className="form-control" value="1">Heading 1</option>
         <option className="form-control" value="2">Heading 2</option>
         <option className="form-control" value="3">Heading 3</option>

@@ -12,10 +12,21 @@ class WidgetList extends React.Component {
     super(props);
     let name;
     let className;
+
     this.props.findAllWidgetsForTopic(this.props.topicId);
   }
 
+  moveHandler(widget, isUp) {
+    {
+      isUp
+        ? this.props.moveUp(widget)
+        : this.props.moveDown(widget);
+    }
+    this.props.updateLocation(this.props.widgets);
+  }
+
   render() {
+
     return (<div className="rounded mr-4">
       <h2 className="display-4 ml-2 mt-2">Widgets:</h2>
 
@@ -77,26 +88,26 @@ class WidgetList extends React.Component {
         </li>
         {
           this.props.widgets.map((widget, index) => <li className="list-group-item text-dark" key={index}>
-          {!this.props.preview &&
-            <div>
-            <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
-              <i className="fa fa-times-circle"/>
-            </button>
-            <button onClick={() => this.props.moveDown(widget)} className="float-right btn-sm btn-warning ml-2">
-              <i className="fa fa-arrow-down"/>
-            </button>
-            <button onClick={() => this.props.moveUp(widget)} className="float-right btn-sm btn-warning ml-2">
-              <i className="fa fa-arrow-up"/>
-            </button>
-          </div>
-          }
+            {
+              !this.props.preview && <div>
+                  <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
+                    <i className="fa fa-times-circle"/>
+                  </button>
+                  <button onClick={() => this.moveHandler(widget, false)} className="float-right btn-sm btn-warning ml-2">
+                    <i className="fa fa-arrow-down"/>
+                  </button>
+                  <button onClick={() => this.moveHandler(widget, true)} className="float-right btn-sm btn-warning ml-2">
+                    <i className="fa fa-arrow-up"/>
+                  </button>
+                </div>
+            }
 
             {widget.className === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
-            {widget.className === 'LIST' && <ListWidget widget={widget} updateWidget={this.props.updateWidget}preview={this.props.preview}/>}
-            {widget.className === 'HEADING' && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget}preview={this.props.preview}/>}
-            {widget.className === 'LINK' && <LinkWidget widget={widget} updateWidget={this.props.updateWidget}preview={this.props.preview}/>}
-            {widget.className === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget}preview={this.props.preview}/>}
-            {widget.className === 'IMAGE' && <ImageWidget widget={widget} updateWidget={this.props.updateWidget}preview={this.props.preview}/>}
+            {widget.className === 'LIST' && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
+            {widget.className === 'HEADING' && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
+            {widget.className === 'LINK' && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
+            {widget.className === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
+            {widget.className === 'IMAGE' && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
           </li>)
         }
       </ul>

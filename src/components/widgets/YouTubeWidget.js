@@ -4,7 +4,7 @@ export const YouTubeWidget = ({widget, updateWidget, preview}) => {
   let src;
   return (
     preview
-    ? widget.src && <iframe className="form-control" width="560" height="315" src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;
+    ? widget.src && <iframe  width="560" height="315" src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;
        encrypted-media" allowfullscreen="allowfullscreen"></iframe>
     : <div>
       <h3>YouTube</h3>
@@ -20,7 +20,7 @@ export const YouTubeWidget = ({widget, updateWidget, preview}) => {
       <h4>Preview
       </h4>
       {
-        widget.src && <iframe className="form-control" width="560" height="315" src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;
+        widget.src && <iframe width="560" height="315" src={`https://www.youtube.com/embed/${widget.src}`} frameborder="0" allow="autoplay;
        encrypted-media" allowfullscreen="allowfullscreen"></iframe>
       }
     </div>);
