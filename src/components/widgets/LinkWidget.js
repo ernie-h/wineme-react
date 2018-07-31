@@ -2,6 +2,7 @@ import React from 'react'
 
 export const LinkWidget = ({widget, updateWidget, preview}) => {
   let name;
+  let className;
   let src;
   let text;
   return (
@@ -27,10 +28,32 @@ export const LinkWidget = ({widget, updateWidget, preview}) => {
           widget.src = src.value;
           updateWidget(widget);
         }}/>
-        <label className="mt-3">
-          Widget Name:
-          <input ref={node => name = node} className="form-control" placeholder={widget.name} onChange={() => widget.name = name.value}/>
-        </label>
+        <div className="row">
+          <div className="col-6">
+            <label className="mt-3">
+              Widget Name:
+            </label>
+              <input ref={node => name = node} className="form-control" placeholder={widget.name} onChange={() => widget.name = name.value}/>
+          </div>
+          <div className="col-6">
+            <label className="mt-3">
+              Change Widget Type:
+            </label>
+              <select ref={node => this.className = node} className="form-control" onChange={() => {
+                  widget.className = this.className.value;
+                  updateWidget(widget);
+                }}>
+                <option value="" selected="selected" disabled="disabled" hidden="hidden">
+                  Choose widget type</option>
+                <option value="HEADING">Heading</option>
+                <option value="PARAGRAPH">Paragraph</option>
+                <option value="LIST">List</option>
+                <option value="LINK">Link</option>
+                <option value="IMAGE">Image</option>
+                <option value="YOUTUBE">Youtube</option>
+              </select>
+          </div>
+        </div>
       <h4 className="mt-2">
         Preview:
       </h4>
