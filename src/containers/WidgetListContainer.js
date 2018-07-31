@@ -41,7 +41,6 @@ const dispatcherToPropertyMapper = dispatch => ({
     widget: widget
   }),
   saveWidgets: (widgets, topicId) =>
-
     widgetService.saveAllWidgets(widgets, topicId)
     .then((widgets) => dispatch({
       type: 'SAVE_WIDGETS',

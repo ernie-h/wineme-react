@@ -11,16 +11,22 @@ class WidgetList extends React.Component {
   constructor(props) {
     super(props);
     let name;
-    let className;
+    let createWidgetClassName;
   }
 
   componentDidMount() {
     this.props.findAllWidgetsForTopic(this.props.match.params.topicId);
+    this.props.widgets.sort((a, b) => a.location - b.location);
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.match.params.topicId != this.props.match.params.topicId)
+  componentWillReceiveProps(newProps) {
+    if (newProps.match.params.topicId != this.props.match.params.topicId)
       this.props.findAllWidgetsForTopic(newProps.match.params.topicId);
+    newProps.widgets.sort((a, b) => a.location - b.location);
+
+  }
+  sortLocationOrder(a, b) {
+    return a.location - b.location;
   }
 
   moveHandler(widget, isUp) {
@@ -47,17 +53,15 @@ class WidgetList extends React.Component {
             </div>
             <div className="col">
               <div className="form-inline float-right">
-                <p className="text-light mt-2">
+                <p className="text-dark mt-2">
                   Preview</p>
                 {
                   this.props.preview
-                    ? <i className="fa fa-toggle-on mb-2 ml-1 text-light" onClick={() => this.props.previewMode()}/>
-                    : <i className="fa fa-toggle-off mb-2 ml-1 text-light" onClick={() => this.props.previewMode()}/>
+                    ? <i className="fa fa-toggle-on mb-2 ml-1 text-dark" onClick={() => this.props.previewMode()}/>
+                    : <i className="fa fa-toggle-off mb-2 ml-1 text-secondary" onClick={() => this.props.previewMode()}/>
                 }
 
-                <button className="btn btn-primary ml-4 mr-2 mb-2"
-                  onClick={() => this.props.saveWidgets(this.props.widgets, this.props.match.params.topicId)
-                  .then(alert('Successfuly saved.'))}>
+                <button className="btn btn-primary ml-4 mr-2 mb-2" onClick={() => this.props.saveWidgets(this.props.widgets, this.props.match.params.topicId).then(alert('Successfuly saved.'))}>
                   Save
                 </button>
               </div>
@@ -68,10 +72,10 @@ class WidgetList extends React.Component {
             <button className="btn btn-success float-right ml-3" onClick={() => {
                 if (this.name.value === '') {
                   alert('Please give a name to your widget.');
-                } else if (this.className.value === '') {
+                } else if (this.createWidgetClassName.value === '') {
                   alert('Please select a widget type.');
                 } else {
-                  this.props.createWidget(this.props.match.params.topicId, this.name.value, this.className.value, this.props.widgets.length);
+                  this.props.createWidget(this.props.match.params.topicId, this.name.value, this.createWidgetClassName.value, this.props.widgets.length);
                   this.name.value = '';
                   this.className.value = '';
                 }
@@ -79,38 +83,50 @@ class WidgetList extends React.Component {
               <i className="fa fa-plus"/>
             </button>
           </div>
-          <select ref={node => this.className = node} className="form-control mt-3">
+          <select ref={node => this.createWidgetClassName = node} className="form-control mt-3">
             <option value="" selected="selected" disabled="disabled" hidden="hidden">
               Choose widget type</option>
-            <option value="LINK">Link
-            </option>
-            <option value="PARAGRAPH">Paragraph
-            </option>
-            <option value="IMAGE">Image
-            </option>
-            <option value="HEADING">Heading
-            </option>
-            <option value="LIST">List
-            </option>
+            <option value="HEADING">Heading</option>
+            <option value="PARAGRAPH">Paragraph</option>
+            <option value="LIST">List</option>
+            <option value="LINK">Link</option>
+            <option value="IMAGE">Image</option>
             <option value="YOUTUBE">Youtube</option>
           </select>
         </li>
         {
           this.props.widgets.map((widget, index) => <li className="list-group-item bg-light text-dark" key={index}>
             {
-              !this.props.preview && <div>
-                  <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
-                    <i className="fa fa-times-circle"/>
-                  </button>
-                  <button onClick={() => this.moveHandler(widget, false)} className="float-right btn-sm btn-warning ml-2">
-                    <i className="fa fa-arrow-down"/>
-                  </button>
-                  <button onClick={() => this.moveHandler(widget, true)} className="float-right btn-sm btn-warning ml-2">
-                    <i className="fa fa-arrow-up"/>
-                  </button>
+              !this.props.preview && <div className="row form-inline float-right">
+                  <div className="ml-2">
+                    <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
+                      <i className="fa fa-times-circle"/>
+                    </button>
+                  </div>
+                  <div className=" mb-3 ml-2">
+                    <select ref={node => this.className = node} className="form-control mt-3">
+                      <option value="" selected="selected" disabled="disabled" hidden="hidden">
+                        Choose widget type</option>
+                      <option value="HEADING">Heading</option>
+                      <option value="PARAGRAPH">Paragraph</option>
+                      <option value="LIST">List</option>
+                      <option value="LINK">Link</option>
+                      <option value="IMAGE">Image</option>
+                      <option value="YOUTUBE">Youtube</option>
+                    </select>
+                  </div>
+                  <div className="ml-2">
+                    <button onClick={() => this.moveHandler(widget, false)} className="float-right btn-sm btn-warning ml-2">
+                      <i className="fa fa-arrow-down"/>
+                    </button>
+                  </div>
+                  <div className="mr-4">
+                    <button onClick={() => this.moveHandler(widget, true)} className="float-right btn-sm btn-warning ml-2">
+                      <i className="fa fa-arrow-up"/>
+                    </button>
+                  </div>
                 </div>
             }
-
             {widget.className === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
             {widget.className === 'LIST' && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
             {widget.className === 'HEADING' && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview}/>}
