@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 const WIDGET_TOPIC_API_URL ='http://localhost:8080/api/topic/TID/widget';
 const WIDGET_ID_API_URL = 'http://localhost:8080/api/widget/WID';
-const WIDGET_SAVE_URL = 'http://localhost:8080/api/topic/TID/widget/save';
+const WIDGET_SAVE_URL = 'http://localhost:8080/api/widget/save';
 //for find all topics
 // const LESSON_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson';
 
@@ -23,10 +23,10 @@ export default class WidgetServiceClient {
         return response.json();
       });
   }
-  saveAllWidgets(widgets, topicId) {
-    return fetch(WIDGET_SAVE_URL.replace('TID', topicId),
+  saveAllWidgets(widgets) {
+    return fetch(WIDGET_SAVE_URL,
       {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'content-type': 'application/json'
       },
