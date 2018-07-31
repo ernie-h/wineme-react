@@ -15,8 +15,7 @@ export const WidgetReducer = (
       return {
         widgets: state.widgets.filter(
           widget => widget.id !== action.widgetId
-        ),
-        topicId: action.widget.topicId
+        )
       };
     case 'CREATE_WIDGET':
       return {
@@ -67,8 +66,12 @@ export const WidgetReducer = (
       state.widgets.map((widget) => {
         let index = state.widgets.indexOf(widget);
         if(widget.location != index)
+        console.log('widget loca before: '+ widget.location)
         widget.location = index;
+        console.log('widget loca after: '+ widget.location)
+
       });
+      console.log(state.widgets)
         return {
           widgets: state.widgets
         };
