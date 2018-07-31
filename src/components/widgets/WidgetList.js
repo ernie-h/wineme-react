@@ -1,5 +1,5 @@
 import React from 'react';
-import Toggle from 'react-bootstrap-toggle';
+
 import {LinkWidget} from './LinkWidget';
 import {HeadingWidget} from './HeadingWidget';
 import {ListWidget} from './ListWidget';
@@ -10,8 +10,6 @@ import {ImageWidget} from './ImageWidget'
 class WidgetList extends React.Component {
   constructor(props) {
     super(props);
-    let name;
-    let createWidgetClassName;
   }
 
   componentDidMount() {
@@ -20,7 +18,7 @@ class WidgetList extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.match.params.topicId != this.props.match.params.topicId)
+    if (newProps.match.params.topicId !== this.props.match.params.topicId)
       this.props.findAllWidgetsForTopic(newProps.match.params.topicId);
     newProps.widgets.sort((a, b) => a.location - b.location);
 
@@ -61,65 +59,55 @@ class WidgetList extends React.Component {
                     : <i className="fa fa-toggle-off mb-2 ml-1 text-secondary" onClick={() => this.props.previewMode()}/>
                 }
 
-                <button className="btn btn-primary ml-4 mr-2 mb-2" onClick={() => this.props.saveWidgets(this.props.widgets, this.props.match.params.topicId).then(alert('Successfuly saved.'))}>
+                <button className="btn btn-primary pl-3 pr-3 ml-4 mr-2 mb-2" onClick={() => this.props.saveWidgets(this.props.widgets, this.props.match.params.topicId).then(alert('Successfuly saved.'))}>
                   Save
                 </button>
               </div>
             </div>
           </div>
-          <div className="form-inline">
-            <input ref={node => this.name = node} className="form-control" placeholder="Widget name"/>
-            <button className="btn btn-success float-right ml-3" onClick={() => {
-                if (this.name.value === '') {
-                  alert('Please give a name to your widget.');
-                } else if (this.createWidgetClassName.value === '') {
-                  alert('Please select a widget type.');
-                } else {
-                  this.props.createWidget(this.props.match.params.topicId, this.name.value, this.createWidgetClassName.value, this.props.widgets.length);
-                  this.name.value = '';
-                  this.className.value = '';
-                }
-              }}>
-              <i className="fa fa-plus"/>
-            </button>
+          <div className="row">
+            <div className="col-6">
+              <select ref={node => this.createWidgetClassName = node} className="form-control">
+                <option value="" selected="selected" disabled="disabled" hidden="hidden">
+                  Choose widget type</option>
+                <option value="HEADING">Heading</option>
+                <option value="PARAGRAPH">Paragraph</option>
+                <option value="LIST">List</option>
+                <option value="LINK">Link</option>
+                <option value="IMAGE">Image</option>
+                <option value="YOUTUBE">Youtube</option>
+              </select>
+            </div>
+            <div className='col-6'>
+              <div className="form-inline float-right mr-2">
+                <input ref={node => this.name = node} className="form-control  pr-5" placeholder="Widget name"/>
+                <button className="btn btn-success float-right ml-3" onClick={() => {
+                    if (this.name.value === '') {
+                      alert('Please give a name to your widget.');
+                    } else if (this.createWidgetClassName.value === '') {
+                      alert('Please select a widget type.');
+                    } else {
+                      this.props.createWidget(this.props.match.params.topicId, this.name.value, this.createWidgetClassName.value, this.props.widgets.length);
+                      this.name.value = '';
+                      this.createWidgetClassName.value = '';
+                    }
+                  }}>
+                  <i className="fa fa-plus pl-3 pr-3"/>
+                </button>
+              </div>
+            </div>
           </div>
-          <select ref={node => this.createWidgetClassName = node} className="form-control mt-3">
-            <option value="" selected="selected" disabled="disabled" hidden="hidden">
-              Choose widget type</option>
-            <option value="HEADING">Heading</option>
-            <option value="PARAGRAPH">Paragraph</option>
-            <option value="LIST">List</option>
-            <option value="LINK">Link</option>
-            <option value="IMAGE">Image</option>
-            <option value="YOUTUBE">Youtube</option>
-          </select>
         </li>
         {
           this.props.widgets.map((widget, index) => <li className="list-group-item bg-light text-dark" key={index}>
             {
               !this.props.preview && <div className="row form-inline float-right">
-                  <div className="ml-2">
-                    <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
-                      <i className="fa fa-times-circle"/>
-                    </button>
-                  </div>
-                  <div className=" mb-3 ml-2">
-                    <select ref={node => this.className = node} className="form-control mt-3">
-                      <option value="" selected="selected" disabled="disabled" hidden="hidden">
-                        Choose widget type</option>
-                      <option value="HEADING">Heading</option>
-                      <option value="PARAGRAPH">Paragraph</option>
-                      <option value="LIST">List</option>
-                      <option value="LINK">Link</option>
-                      <option value="IMAGE">Image</option>
-                      <option value="YOUTUBE">Youtube</option>
-                    </select>
-                  </div>
-                  <div className="ml-2">
-                    <button onClick={() => this.moveHandler(widget, false)} className="float-right btn-sm btn-warning ml-2">
-                      <i className="fa fa-arrow-down"/>
-                    </button>
-                  </div>
+                  <button className="float-right btn-sm btn-danger ml-2" onClick={() => this.props.deleteWidget(widget.id)}>
+                    <i className="fa fa-times-circle"/>
+                  </button>
+                  <button onClick={() => this.moveHandler(widget, false)} className="float-right btn-sm btn-warning ml-2">
+                    <i className="fa fa-arrow-down"/>
+                  </button>
                   <div className="mr-4">
                     <button onClick={() => this.moveHandler(widget, true)} className="float-right btn-sm btn-warning ml-2">
                       <i className="fa fa-arrow-up"/>
