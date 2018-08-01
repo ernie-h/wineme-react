@@ -7,6 +7,11 @@ import {YouTubeWidget} from './YouTubeWidget';
 import {ParagraphWidget} from './ParagraphWidget';
 import {ImageWidget} from './ImageWidget'
 
+//google API WIP
+const imageSearch = require('image-search-google');
+const client = new imageSearch('005182741105951600839:fpnjb6o384w', 'AIzaSyDdBtISUIc7WK7B2wpmFgXBvKMBluUoNJc');
+var options = {page:1};
+
 class WidgetList extends React.Component {
   constructor(props) {
     super(props);
@@ -35,9 +40,23 @@ class WidgetList extends React.Component {
     }
     this.props.updateLocation(this.props.widgets);
   }
+  //google api WIP
+  search() {
+    client.search('obama', options)
+        .then(images => {console.log(images);
+            /*
+            [{
+                'url': item.link,
+                'thumbnail':item.image.thumbnailLink,
+                'snippet':item.title,
+                'context': item.image.contextLink
+            }]
+             */
+        })
+        .catch(error => console.log(error));
+  }
 
   render() {
-
     return (<div className="rounded mr-4">
       <h2 className="display-4 ml-2 mt-2">Widgets:</h2>
 

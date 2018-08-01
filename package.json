@@ -6,6 +6,7 @@
     "bootstrap": "^4.1.2",
     "eslint-config-react-app": "^2.1.0",
     "font-awesome": "^4.7.0",
+    "image-search-google": "^1.0.10",
     "react": "^16.4.1",
     "react-bootstrap-toggle": "^2.3.1",
     "react-dom": "^16.4.1",

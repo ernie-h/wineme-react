@@ -15,6 +15,7 @@ class App extends React.Component {
     return (
       <Router>
       <div className="container-fluid bg-light pb-5 pt-3">
+
       <CourseManager />
     </div>
   </Router>);
