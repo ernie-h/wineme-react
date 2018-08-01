@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 const WIDGET_TOPIC_API_URL ='http://localhost:8080/api/topic/TID/widget';
 const WIDGET_ID_API_URL = 'http://localhost:8080/api/widget/WID';
+const WIDGET_API_URL = 'http://localhost:8080/api/widget';
 const WIDGET_SAVE_URL = 'http://localhost:8080/api/widget/save';
 //for find all topics
 // const LESSON_API_URL = 'https://eh-cs4550-java-server.herokuapp.com/api/lesson';
@@ -14,6 +15,20 @@ export default class WidgetServiceClient {
     if (!this[_singleton])
       this[_singleton] = new WidgetServiceClient(_singleton);
     return this[_singleton];
+  }
+  findAllWidgets() {
+    return fetch(WIDGET_API_URL)
+      .then(function(response) {
+        return response.json();
+      });
+  }
+  
+  findWidgetById(widgetId) {
+    return fetch(
+        WIDGET_ID_API_URL.replace('WID', widgetId))
+      .then(function(response) {
+        return response.json();
+      });
   }
 
   findAllWidgetsForTopic(topicId) {
@@ -52,14 +67,14 @@ export default class WidgetServiceClient {
       method: 'DELETE'
     });
   }
-  //
-  // updateTopic(topicId, topic) {
-  //   return fetch(WIDGET_ID_API_URL.replace('TID', topicId), {
-  //     method: 'PUT',
-  //     body: JSON.stringify(topic),
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     }
-  //   });
-  // }
+
+  updateWidget(widgetId, widget) {
+    return fetch(WIDGET_ID_API_URL.replace('WID', widgetId), {
+      method: 'PUT',
+      body: JSON.stringify(widget),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }

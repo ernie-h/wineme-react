@@ -6,6 +6,7 @@ export const WidgetReducer = (
   state = {
     widgets: [],
     preview: false,
+    saved: false,
     topicId: ''
   },
   action) => {
@@ -62,19 +63,15 @@ export const WidgetReducer = (
       return {
         widgets: state.widgets.splice(0)
       };
-      case 'UPDATE_LOCATION':
+    case 'UPDATE_LOCATION':
       state.widgets.map((widget) => {
         let index = state.widgets.indexOf(widget);
-        if(widget.location != index)
-        console.log('widget loca before: '+ widget.location)
-        widget.location = index;
-        console.log('widget loca after: '+ widget.location)
-
+        if (widget.location != index)
+          widget.location = index;
       });
-      console.log(state.widgets)
-        return {
-          widgets: state.widgets
-        };
+      return {
+        widgets: state.widgets
+      };
     case 'PREVIEW_MODE':
       return {
         widgets: state.widgets,
