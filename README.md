@@ -19,7 +19,7 @@ First login to Heroku.
 `heroku login`
 
 Then add this heroku remote to your git remotes.
-`heroku git:remote -a https://git.heroku.com/wine-me-server.git`
+`heroku git:remote -a https://git.heroku.com/wine-me.git`
 
 Then push your heroku master branch to heroku
 `git push heroku master`
