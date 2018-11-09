@@ -7,7 +7,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 
-import CourseManager from './containers/CourseManager';
+import LoginLayout from './containers/LoginLayout';
 
 
 class App extends React.Component {
@@ -15,9 +15,8 @@ class App extends React.Component {
     return (
       <Router>
       <div className="container-fluid bg-light pb-5 pt-3">
-
-      <CourseManager />
-    </div>
+        <LoginLayout/>
+      </div>
   </Router>);
   }
 }
