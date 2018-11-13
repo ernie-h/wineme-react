@@ -1,8 +1,10 @@
 {
-  "name": "cs4550-ehao-react-app",
+  "name": "cs3200-wineme",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.4.0",
+    "antd": "^3.10.7",
     "bootstrap": "^4.1.3",
     "eslint-config-react-app": "^2.1.0",
     "font-awesome": "^4.7.0",
