@@ -1,4 +1,4 @@
-# wineme-react :wine::fire:
+# wineme-react :wine_glass::fire:
 
 ## Set-up :rocket:
 Please run this to update your `package.json` file which keeps track of your dependencies
