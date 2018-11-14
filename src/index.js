@@ -14,7 +14,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-      <div className="container-fluid bg-light pb-5 pt-3">
+      <div className="container-fluid pb-5 pt-3">
         <LoginLayout/>
       </div>
   </Router>);
