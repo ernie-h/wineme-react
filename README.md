@@ -1,6 +1,6 @@
-# wineme-react
+# wineme-react :wine::fire:
 
-## Set-up
+## Set-up :rocket:
 Please run this to update your `package.json` file which keeps track of your dependencies
 
 `npm i --save`
