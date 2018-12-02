@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link, Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+import {NavLink, Switch, Route, BrowserRouter as Router} from 'react-router-dom';
 import { Home } from './containers/Home';
 import { Register } from './containers/Register';
 import { MyersBriggs } from './containers/MyersBriggs';
@@ -19,10 +19,13 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-        <Route path='/' component={Home}>
-          <Route path='/myersbriggs' component={MyersBriggs}/>
-          <Route path='/register' component={Stores} />
-        </Route>
+          <div>
+            <Home />
+            <div>
+              <Route path='/myersbriggs' component={MyersBriggs}/>
+              <Route path='/stores' component={Stores} />
+            </div>
+          </div>
         <Route path='/login' component={LoginLayout} />
         <Route path='/register' component={Register} />
         </div>

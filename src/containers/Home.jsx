@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export class Home extends React.Component {
 
@@ -33,30 +33,30 @@ export class Home extends React.Component {
                         mode='horizontal'
                         className='m-5 row'
                         >
-                        <Link to='/myersbriggs'>
+                        <NavLink to='/myersbriggs'>
                             <Menu.Item 
                             key='mb'
                             className='p-3 col-sm'>
                                 <img src='https://i.imgur.com/GMIRVQT.png' height='30' width='30' />
                                 <h6> Myers Briggs Wine Recommendations</h6>
                             </Menu.Item>
-                        </Link>
-                        <Link to='/reviews'>
+                        </NavLink>
+                        <NavLink to='/reviews'>
                             <Menu.Item 
                             key='reviews'
                             className='p-3 col-sm'>
                                 <img src='https://i.imgur.com/4olGp20.png' height='30' width='30' />
                                 <h6> Review Based Recommendations</h6>
                             </Menu.Item>
-                        </Link>
-                        <Link to='/stores'>
+                        </NavLink>
+                        <NavLink to='/stores'>
                             <Menu.Item 
                             key='store'
                             className='p-3 col-sm'>
                                 <img src='https://i.imgur.com/K3NPYq3.png' height='30' width='30' />
                                 <h6> Wines at My Favorite Store</h6>
                         </Menu.Item>
-                        </Link>
+                        </NavLink>
                     </Menu>
                 </div>
 
