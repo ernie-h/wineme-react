@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Input } from 'antd';
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 
 import { Header } from './Header';
 
