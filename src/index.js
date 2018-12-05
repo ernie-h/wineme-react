@@ -19,13 +19,13 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <div>
+          {/* <div>
             <Home />
             <div>
               <Route path='/myersbriggs' component={MyersBriggs}/>
               <Route path='/stores' component={Stores} />
             </div>
-          </div>
+          </div> */}
         <Route path='/login' component={LoginLayout} />
         <Route path='/register' component={Register} />
         </div>
